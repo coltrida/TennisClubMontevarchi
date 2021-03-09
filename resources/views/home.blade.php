@@ -1,6 +1,8 @@
 @extends('layouts.template')
 
 @section('container')
+
+    @guest
     <!-- Start Feature Slider -->
     <div class="rev_slider_wrapper">
         <div id="slider1" class="rev_slider rev-slider-standard"  data-version="5.0">
@@ -138,7 +140,14 @@
             </ul>
         </div><!-- END REVOLUTION SLIDER -->
     </div><!-- END OF SLIDER WRAPPER -->
+    @else
+        <section class="main-content">
+            <div class="container body-content">
+                <h2>Prenotazioni</h2>
 
+            </div>
+        </section>
+    @endguest
 
     <!-- Start Main Content -->
     <section class="main-content">

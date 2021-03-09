@@ -9,7 +9,7 @@
     <meta name="author" content="Design Lots">
     <link rel="icon" href="{{asset('favicon.ico')}}">
 
-    <title>Ultimate Sport</title>
+    <title>TC Montevarchi</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
@@ -90,7 +90,14 @@
             </div>
 
             <div class="head-right">
-                <strong>Next Game:</strong> <div id="clock"></div>
+                @guest
+                    <strong>Next Game:</strong> <div id="clock"></div>
+                @else
+                    <strong>Credito: € {{Auth::user()->credito}}</strong>
+                    @if(Auth::user()->hasprivilegi)
+                        <strong> - Privilegi: {{Auth::user()->privilegi}}</strong>
+                    @endif
+                @endguest
             </div>
         </div>
     </nav>
@@ -111,14 +118,6 @@
                 </div>
 
                 <ul class="menuzord-menu head-right">
-                    <li class="active"><a href="index.html">Home Pages</a>
-                        <ul class="dropdown">
-                            <li><a href="index.html">Home 1</a></li>
-                            <li><a href="index-2.html">Home 2</a></li>
-                            <li><a href="index-3.html">Home 3</a></li>
-                            <li><a href="index-4.html">Home 4</a></li>
-                        </ul>
-                    </li>
 
                     <li><a href="layout-grid.html">Blog Layouts</a>
                         <ul class="dropdown">
@@ -191,22 +190,30 @@
                         <a class="overlay-btn btn-open" href="#"><em class="fa fa-user"></em></a>
                     </li>
                     @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <li>
+                            <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
+                            <ul class="dropdown">
+                                @if(Auth::user()->isAdmin)
+                                    <li><a href="index.html">Prenotazioni Particolari</a></li>
+                                    <li><a href="index-2.html">Eliminazioni Particolari</a></li>
+                                    <li><a href="index-3.html">Lista Soci</a></li>
+                                @else
+                                    <li><a href="index.html">Annulla Prenotazioni</a></li>
+                                @endif
+                                <li><a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
+                                        {{ __('Logout') }}
+                                    </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form></li>
+                            </ul>
+
                         </li>
                     @endguest
                 </ul>
