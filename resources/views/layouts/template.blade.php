@@ -104,9 +104,9 @@
             <!-- Start Menu -->
             <div id="menuzord" class="menuzord">
                 <div class="head-left">
-                    <a href="index.html" class="menuzord-brand">
+                    <a href="{{route('index')}}" class="menuzord-brand">
                         <!-- Sport <div class="tag-line">Sporting Club Theme</div> -->
-                        <img class="logo-img" src="{{asset('img/logo@2x.png')}}" alt="Logo" />
+                        <img class="logo-img" src="{{asset('img/logo.png')}}" alt="Logo" />
                     </a>
                 </div>
 
@@ -290,7 +290,7 @@
 
                 <div class="col-md-3">
                     <div class="widget widget-brand-address">
-                        <h3><img class="logo-img" src="{{asset('img/logo@2x.png')}}" alt="Logo" /></h3>
+                        <h3><img class="logo-img" src="{{asset('img/logo.png')}}" alt="Logo" /></h3>
                         <ul class="list-styled list-bordered">
                             <li><strong>Address:</strong><br/>310 Ashfield Ave, Suburbia, Brisbane, Australia, 4000 </li>
                             <li><a href="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d28369.415587766056!2d152.98820641500242!3d-27.276331333808365!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b93fb9c9442c901%3A0x10b5aa2f23d9e4e1!2sAshford+Circuit%2C+Petrie+QLD+4502!5e0!3m2!1sen!2sau!4v1406620130126" class="fancybox fancybox.iframe">View on map</a></li>
