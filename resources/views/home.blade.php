@@ -143,11 +143,21 @@
     @else
         <section class="main-content">
             <div class="container body-content">
-                <h2>Prenotazioni</h2>
+                <h1>Prenotazioni</h1>
+                {{--<div id="datepicker"></div>
+                <input type="text" class="form-control" value="02-16-2012">--}}
+                <div style="display: flex;">
+                    <div><input type="date" name="giorno" id="giorno"></div>
+                    <div style="margin-left: 10px">
+                        <button type="submit">Visualizza</button>
+                    </div>
+                </div>
 
             </div>
         </section>
     @endguest
+
+    <hr class="rule-fat"/>
 
     <!-- Start Main Content -->
     <section class="main-content">
@@ -413,12 +423,27 @@
 
 
                 </div><!-- /.grid -->
-                <div class="text-center">
-                    <small class="meta-text"><em class="fa fa-users"></em> <strong>Pictured:</strong> Johny, Jacob, Max, Stewart, Billy, Cameron &amp; Jason</small>
-                </div>
+
                 <br/>
             </section>
 
         </div><!-- /.container -->
     </section><!-- /.main-content -->
 @endsection
+{{--
+
+@section('footer')
+    @parent
+    <script>
+        $('document').ready(function () {
+            $('#datepicker').datepicker({
+                format: "dd/mm/yyyy",
+                weekStart: 1,
+                language: "it",
+                daysOfWeekHighlighted: "0,6",
+                todayHighlight: true
+            });
+        });
+    </script>
+@endsection
+--}}

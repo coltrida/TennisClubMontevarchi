@@ -267,30 +267,34 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="widget widget-contact">
-                        <h3>Contact Us</h3>
+                        <h3>Contattaci</h3>
                         <ul class="list-styled list-bordered">
-                            <li><strong>Telephone Enquiry:</strong><br/>+61 555 555 1234</li>
+                            <li><strong>Telefono:</strong><br/>+61 555 555 1234</li>
                             <li><strong>Facsimile:</strong><br/>+61 555 555 1234</li>
-                            <li><a href="#">info@sports.com</a></li>
+                            <li><a href="#">info@tcmontevarchi.it</a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-md-3">
-                    <div class="widget widget-text">
-                        <h3>Our Mission</h3>
-                        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur blandit tempus porttitor. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                    <div class="widget widget-paired-list">
+                        <h3>Orario</h3>
+                        <ul class="list-paired">
+                            <li><em class="fa fa-clock-o scale-80 feat-color"></em> Lunedì <span>9am - 10pm</span></li>
+                            <li><em class="fa fa-clock-o scale-80 feat-color"></em> Martedì <span>9am - 9pm</span></li>
+                            <li><em class="fa fa-clock-o scale-80 feat-color"></em> Mercoledì <span>7am - 9pm</span></li>
+                            <li><em class="fa fa-clock-o scale-80 feat-color"></em> Giovedì <span>9am - 1pm</span></li>
+                        </ul>
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div class="widget widget-paired-list">
-                        <h3>Club House</h3>
+                        <h3>&nbsp;</h3>
                         <ul class="list-paired">
-                            <li><em class="fa fa-clock-o scale-80 feat-color"></em> Monday <span>9am - 10pm</span></li>
-                            <li><em class="fa fa-clock-o scale-80 feat-color"></em> Tue-Fri <span>9am - 9pm</span></li>
-                            <li><em class="fa fa-clock-o scale-80 feat-color"></em> Sat-Sun <span>7am - 9pm</span></li>
-                            <li><em class="fa fa-clock-o scale-80 feat-color"></em> Holidays <span>9am - 1pm</span></li>
+                            <li><em class="fa fa-clock-o scale-80 feat-color"></em> Vernerdì <span>9am - 10pm</span></li>
+                            <li><em class="fa fa-clock-o scale-80 feat-color"></em> Sabato <span>9am - 9pm</span></li>
+                            <li><em class="fa fa-clock-o scale-80 feat-color"></em> Domenica <span>7am - 9pm</span></li>
                         </ul>
                     </div>
                 </div>
@@ -314,22 +318,22 @@
     <footer class="post-footer">
         <div class="container">
             <div class="foot-left">
-                <div>&copy; DesignLots <span class="copy-year"></span>. All rights reserved.</div>
+                <div>&copy; ColtriCat <span class="copy-year"></span>. All rights reserved.</div>
             </div>
 
-            <div class="foot-right">
+            {{--<div class="foot-right">
                 <ul class="social-links">
                     <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                     <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                     <li><a href="#"><i class="fa fa-globe"></i></a></li>
                 </ul>
-            </div>
+            </div>--}}
         </div>
     </footer>
 </div><!--/footer -->
 
 
-
+@section('footer')
 <!-- JavaScript
    ================================================== -->
 <script src="{{asset('js/jquery.min.js')}}"></script>
@@ -372,12 +376,6 @@
 <script type="text/javascript" src="{{asset('js/jquery.validate.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/jquery.maskedinput.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/jquery.modal.js')}}"></script>
-<!--[if lt IE 10]>
- <script type="text/javascript" src="./library/js/skyforms/js/jquery.placeholder.min.js"></script>
-[endif]
-[if lt IE 9]>
-<script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-[endif] -->
 
 <!-- RS5.0 Core JS Files -->
 <script type="text/javascript" src="{{asset('js/jquery.themepunch.tools.min.js')}}"></script>
@@ -390,5 +388,7 @@
 <!-- Scripts Go -->
 <script src="{{asset('js/validate-contact.js')}}"></script>
 <script src="{{asset('js/scripts.js')}}"></script>
+
+@show
 </body>
 </html>
