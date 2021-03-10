@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\Booking;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use phpDocumentor\Reflection\Types\Boolean;
 use function dd;
@@ -21,8 +22,6 @@ class BookingService
         return $booking->mapWithKeys(function ($item) {
             return [$item['orainizio'] => $item];
         });
-
-        //dd($keyed);
     }
 
     public function createPrenotazione($giorno, $ora, $campo)
@@ -64,5 +63,15 @@ class BookingService
             ['orainizio', $ora],
             ['campo', $campo]
         ])->first();
+    }
+
+    public function domani($giorno)
+    {
+        return Carbon::create($giorno)->addDay()->format('Y-m-d');
+    }
+
+    public function ieri($giorno)
+    {
+        return Carbon::create($giorno)->subDay()->format('Y-m-d');
     }
 }
