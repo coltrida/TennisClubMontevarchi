@@ -461,13 +461,13 @@
             today = yyyy + '-' + mm + '-' + dd;
             $('#giorno').val(today);
 
-            let url = '{{route('prenotazioni', ":today")}}';
+            let url = '{{route('prenotazioni', [":today", 'Campo1'])}}';
             url = url.replace(':today', today);
             $('#button').attr("href", url);
 
             $('#giorno').on('change', function (ele) {
                 let nuovoGiorno = ele.target.value;
-                url = '{{route('prenotazioni', ":nuovoGiorno")}}';
+                url = '{{route('prenotazioni', [":nuovoGiorno", 'Campo1'])}}';
                 url = url.replace(':nuovoGiorno', nuovoGiorno);
                 $('#button').attr("href", url);
             })

@@ -10,10 +10,10 @@ use function view;
 
 class BookingController extends Controller
 {
-    public function visualizzaPrenotazioni($giorno, BookingService $bookingService)
+    public function visualizzaPrenotazioni($giorno, $campo, BookingService $bookingService)
     {
-        $bookings = $bookingService->showPrenotazioni($giorno);
-        return view('prenotazioni.visualizzaPrenotazioni', compact('bookings', 'giorno'));
+        $bookings = $bookingService->showPrenotazioni($giorno, $campo);
+        return view('prenotazioni.visualizzaPrenotazioni', compact('bookings', 'giorno', 'campo'));
     }
 
     public function prenota($giorno, $ora, $campo, BookingService $bookingService)

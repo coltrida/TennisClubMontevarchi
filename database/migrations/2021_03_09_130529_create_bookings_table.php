@@ -15,10 +15,10 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->date('giorno');
-            $table->unsignedTinyInteger('orainizio');
+            $table->date('giorno')->index();
+            $table->unsignedTinyInteger('orainizio')->index();
             $table->char('tipo');
-            $table->char('campo');
+            $table->char('campo')->index();
             $table->timestamps();
         });
     }

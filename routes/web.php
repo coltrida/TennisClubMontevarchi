@@ -13,6 +13,6 @@ Route::group(
         'middleware' => 'auth'
     ],
     function(){
-        Route::get('/prenotazioni/{giorno}', [BookingController::class, 'visualizzaPrenotazioni'])->name('prenotazioni');
+        Route::get('/prenotazioni/{giorno}/{campo}', [BookingController::class, 'visualizzaPrenotazioni'])->name('prenotazioni');
         Route::get('/prenotazioni/{giorno}/{ora}/{campo}', [BookingController::class, 'prenota'])->name('prenota');
     });
