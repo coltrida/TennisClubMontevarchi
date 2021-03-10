@@ -147,10 +147,22 @@
                 {{--<div id="datepicker"></div>
                 <input type="text" class="form-control" value="02-16-2012">--}}
                 <div style="display: flex;">
-                    <div><input type="date" name="giorno" id="giorno"></div>
-                    <div style="margin-left: 10px">
-                        <button type="submit">Visualizza</button>
-                    </div>
+                    <form action="{{route('prenotazioni')}}" method="POST">
+                        @csrf
+                        <div style="display: flex">
+                            <div><input class="form-control"
+                                        style="border: 1px black solid"
+                                        type="date"
+                                        name="giorno"
+                                        id="giorno"
+                                        value="2012-03-23"
+                                ></div>
+                            <div style="margin-left: 10px">
+                                <button class="btn btn-primary" type="submit">Visualizza</button>
+                            </div>
+                        </div>
+
+                    </form>
                 </div>
 
             </div>
