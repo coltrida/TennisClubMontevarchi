@@ -13,10 +13,16 @@ class BookingService
 {
     public function showPrenotazioni($giorno, $campo)
     {
-        return Booking::with('users:name')->where([
+        $booking = Booking::with('users:name')->where([
                 ['giorno', $giorno],
                 ['campo', $campo]
             ])->get();
+
+        return $booking->mapWithKeys(function ($item) {
+            return [$item['orainizio'] => $item];
+        });
+
+        //dd($keyed);
     }
 
     public function createPrenotazione($giorno, $ora, $campo)

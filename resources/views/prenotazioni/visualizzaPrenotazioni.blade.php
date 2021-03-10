@@ -30,35 +30,39 @@
                             {{$i}}:00 - {{$i+1}}:00
                         </div>
 
-                        <a href="{{route('prenota', ['giorno'=>$giorno, 'ora'=>$i, 'campo' => 'Campo1'])}}"
+                        <a href="{{route('prenota', ['giorno'=>$giorno, 'ora'=>$i, 'campo' => $campo])}}"
                            class="btn btn-success col-sm-6 col-md-2"
                            style="color: black; margin: 0 5px 0 40px; border: black 1px solid; height: 40px; box-shadow: 2px 2px #888888;"
                         >
-
+                        {{isset($bookings[$i]) ? isset($bookings[$i]->users[0]) ? $bookings[$i]->users[0]->name : '' : ''}}
                         </a>
-                        <a href="{{route('prenota', ['giorno'=>$giorno, 'ora'=>$i, 'campo' => 'Campo1'])}}"
+                        <a href="{{route('prenota', ['giorno'=>$giorno, 'ora'=>$i, 'campo' => $campo])}}"
                            class="btn btn-success col-sm-6 col-md-2"
                            style="color: black; margin: 0; border: black 1px solid; height: 40px; box-shadow: 2px 2px #888888;"
                         >
-
+                            {{isset($bookings[$i]) ? isset($bookings[$i]->users[1]) ? $bookings[$i]->users[1]->name : '' : ''}}
                         </a>
-                        <a href="{{route('prenota', ['giorno'=>$giorno, 'ora'=>$i, 'campo' => 'Campo1'])}}"
+                        <a href="{{route('prenota', ['giorno'=>$giorno, 'ora'=>$i, 'campo' => $campo])}}"
                             class="btn btn-success col-sm-6 col-md-2"
                            style="color: black; margin: 0 5px; border: black 1px solid; height: 40px; box-shadow: 2px 2px #888888;"
                         >
-
+                            {{isset($bookings[$i]) ? isset($bookings[$i]->users[2]) ? $bookings[$i]->users[2]->name : '' : ''}}
                         </a>
-                        <a href="{{route('prenota', ['giorno'=>$giorno, 'ora'=>$i, 'campo' => 'Campo1'])}}"
+                        <a href="{{route('prenota', ['giorno'=>$giorno, 'ora'=>$i, 'campo' => $campo])}}"
                             class="btn btn-success col-sm-6 col-md-2"
                             style="color: black; margin: 0; border: black 1px solid; height: 40px; box-shadow: 2px 2px #888888;"
                         >
-
+                            {{isset($bookings[$i]) ? isset($bookings[$i]->users[3]) ? $bookings[$i]->users[3]->name : '' : ''}}
                         </a>
 
+                        @if(isset($bookings[$i]))
                         <div
                             class="alert alert-info col-sm-6 col-md-1"
                             style="padding: 8px; color: black; margin: 0 0 0 40px; border: black 1px solid; box-shadow: 2px 2px #888888;"
-                        >Singolare</div>
+                        >
+                            {{$bookings[$i]->tipo}}
+                        </div>
+                        @endif
                     </div>
 
                 </div>
