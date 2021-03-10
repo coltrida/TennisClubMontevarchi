@@ -147,22 +147,20 @@
                 {{--<div id="datepicker"></div>
                 <input type="text" class="form-control" value="02-16-2012">--}}
                 <div style="display: flex;">
-                    <form action="{{route('prenotazioni')}}" method="POST">
-                        @csrf
+
                         <div style="display: flex">
                             <div><input class="form-control"
                                         style="border: 1px black solid"
                                         type="date"
                                         name="giorno"
                                         id="giorno"
-                                        value="2012-03-23"
                                 ></div>
                             <div style="margin-left: 10px">
-                                <button class="btn btn-primary" type="submit">Visualizza</button>
+                                <a id="button" class="btn btn-primary">Visualizza</a>
                             </div>
                         </div>
 
-                    </form>
+
                 </div>
 
             </div>
@@ -442,20 +440,37 @@
         </div><!-- /.container -->
     </section><!-- /.main-content -->
 @endsection
-{{--
 
 @section('footer')
     @parent
     <script>
         $('document').ready(function () {
-            $('#datepicker').datepicker({
+            /*$('#datepicker').datepicker({
                 format: "dd/mm/yyyy",
                 weekStart: 1,
                 language: "it",
                 daysOfWeekHighlighted: "0,6",
                 todayHighlight: true
-            });
+            });*/
+
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            let yyyy = today.getFullYear();
+
+            today = yyyy + '-' + mm + '-' + dd;
+            $('#giorno').val(today);
+
+            let url = '{{route('prenotazioni', ":today")}}';
+            url = url.replace(':today', today);
+            $('#button').attr("href", url);
+
+            $('#giorno').on('change', function (ele) {
+                let nuovoGiorno = ele.target.value;
+                url = '{{route('prenotazioni', ":nuovoGiorno")}}';
+                url = url.replace(':nuovoGiorno', nuovoGiorno);
+                $('#button').attr("href", url);
+            })
         });
     </script>
 @endsection
---}}

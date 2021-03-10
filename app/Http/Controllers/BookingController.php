@@ -10,15 +10,18 @@ use function view;
 
 class BookingController extends Controller
 {
-    public function visualizzaPrenotazioni(BookingRequest $request, BookingService $bookingService)
+    public function visualizzaPrenotazioni($giorno, BookingService $bookingService)
     {
-        $bookings = $bookingService->showPrenotazioni($request);
-        $giorno = $request->giorno;
+        $bookings = $bookingService->showPrenotazioni($giorno);
         return view('prenotazioni.visualizzaPrenotazioni', compact('bookings', 'giorno'));
     }
 
     public function prenota($giorno, $ora, $campo, BookingService $bookingService)
     {
-        dd($giorno.' '.$ora.' '.$campo);
+        //dd($giorno.' '.$ora.' '.$campo);
+        if(!$bookingService->createPrenotazione($giorno, $ora, $campo)) {
+            return redirect()->back()->withMessage('Errore nella prenotazione');
+        }
+        return redirect()->back()->withMessage('Prenotazione effettuata');
     }
 }
