@@ -18,9 +18,9 @@ class BookingController extends Controller
         return view('prenotazioni.visualizzaPrenotazioni', compact('bookings', 'giorno', 'campo', 'ieri', 'domani'));
     }
 
-    public function prenota($giorno, $ora, $campo, BookingService $bookingService)
+    public function prenota($giorno, $ora, $campo, $tipo, BookingService $bookingService)
     {
-        if(!$bookingService->createPrenotazione($giorno, $ora, $campo)) {
+        if(!$bookingService->createPrenotazione($giorno, $ora, $campo, $tipo)) {
             return redirect()->back()->withMessage('Errore nella prenotazione');
         }
         return redirect()->back()->withMessage('Prenotazione effettuata');

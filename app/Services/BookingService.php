@@ -24,26 +24,26 @@ class BookingService
         });
     }
 
-    public function createPrenotazione($giorno, $ora, $campo)
+    public function createPrenotazione($giorno, $ora, $campo, $tipo)
     {
         $res = true;
         $prenotazioneEsistente = $this->prentazioneEsistente($giorno, $ora, $campo);
         if (!$prenotazioneEsistente)
         {
-            $res = $this->creaNuovaPrenotazione($giorno, $ora, $campo);
+            $res = $this->creaNuovaPrenotazione($giorno, $ora, $campo, $tipo);
         } else {
             $res = $this->aggiornaPrenotazioneEsistente($prenotazioneEsistente);
         }
         return $res;
     }
 
-    private function creaNuovaPrenotazione($giorno, $ora, $campo)
+    private function creaNuovaPrenotazione($giorno, $ora, $campo, $tipo)
     {
         $res = $prenotazione = Booking::create([
             'giorno' => $giorno,
             'orainizio' => $ora,
             'campo' => $campo,
-            'tipo' => 'Singolare'
+            'tipo' => $tipo
         ]);
         if ($res){
             $prenotazione->users()->attach(Auth::id());

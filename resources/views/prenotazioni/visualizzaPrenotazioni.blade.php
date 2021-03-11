@@ -3,75 +3,90 @@
 @section('container')
     <section class="main-content">
         <div class="container body-content">
-            <div style="display: flex; justify-content: space-between; align-items: center">
-                <div><h1>{{$campo}}</h1></div>
-                <div style="display: flex; justify-content: space-between; align-items: center">
-                    <div>
-                        <a href="{{route('prenotazioni', ['giorno' => $ieri, 'campo' => $campo])}}">
-                            <h2><i class="fas fa-arrow-circle-left"></i></h2>
-                        </a>
-                    </div>
-                    <div style="margin: 0 10px"><h2>{{$giorno}}</h2></div>
-                    <div>
-                        <a href="{{route('prenotazioni', ['giorno' => $domani, 'campo' => $campo])}}">
-                            <h2><i class="fas fa-arrow-circle-right"></i></h2>
-                        </a>
-                    </div>
-                </div>
-                <div>
-                    <a href="{{route('prenotazioni', ['giorno' => $giorno, 'campo' => 'Campo1'])}}"
-                       class="btn btn-info" style="border: black solid 1px" type="submit">Campo 1</a>
-                    <a href="{{route('prenotazioni', ['giorno' => $giorno, 'campo' => 'Campo2'])}}"
-                       class="btn btn-info" style="border: black solid 1px" type="submit">Campo 2</a>
-                    <a href="{{route('prenotazioni', ['giorno' => $giorno, 'campo' => 'Campo3'])}}"
-                       class="btn btn-info" style="border: black solid 1px" type="submit">Campo 3</a>
-                    <a href="{{route('prenotazioni', ['giorno' => $giorno, 'campo' => 'Campo4'])}}"
-                       class="btn btn-info" style="border: black solid 1px" type="submit">Campo 4</a>
-                </div>
-            </div>
+
+            @include('prenotazioni.partials.singolodoppio')
+            @include('prenotazioni.partials.header')
 
             @for($i = 9; $i < 23; $i++)
-                <div class="alert alert-danger"
-                     style="border: black 1px solid;">
+                <div class="alert"
+                     style="border: black 1px solid; box-shadow: 2px 2px #888888; background-image: url(/img/bg3.jpg)">
                     <div class="row">
                         <div class="alert alert-success col-sm-6 col-md-2"
                              style="padding: 8px; color: black; margin: 0 10px; width: 120px; border: black 1px solid; box-shadow: 2px 2px #888888;"
                         >
                             {{$i}}:00 - {{$i+1}}:00
+                            {{--<a href="#ex1" rel="modal:open">Open Modal</a>--}}
                         </div>
 
-                        <a href="{{route('prenota', ['giorno'=>$giorno, 'ora'=>$i, 'campo' => $campo])}}"
-                           class="btn btn-success col-sm-6 col-md-2"
-                           style="color: black; margin: 0 5px 0 40px; border: black 1px solid; height: 40px; box-shadow: 2px 2px #888888;"
-                        >
-                        {{isset($bookings[$i]) ? isset($bookings[$i]->users[0]) ? $bookings[$i]->users[0]->name : '' : ''}}
-                        </a>
-                        <a href="{{route('prenota', ['giorno'=>$giorno, 'ora'=>$i, 'campo' => $campo])}}"
-                           class="btn btn-success col-sm-6 col-md-2"
-                           style="color: black; margin: 0; border: black 1px solid; height: 40px; box-shadow: 2px 2px #888888;"
-                        >
-                            {{isset($bookings[$i]) ? isset($bookings[$i]->users[1]) ? $bookings[$i]->users[1]->name : '' : ''}}
-                        </a>
-                        <a href="{{route('prenota', ['giorno'=>$giorno, 'ora'=>$i, 'campo' => $campo])}}"
-                            class="btn btn-success col-sm-6 col-md-2"
-                           style="color: black; margin: 0 5px; border: black 1px solid; height: 40px; box-shadow: 2px 2px #888888;"
-                        >
-                            {{isset($bookings[$i]) ? isset($bookings[$i]->users[2]) ? $bookings[$i]->users[2]->name : '' : ''}}
-                        </a>
-                        <a href="{{route('prenota', ['giorno'=>$giorno, 'ora'=>$i, 'campo' => $campo])}}"
-                            class="btn btn-success col-sm-6 col-md-2"
-                            style="color: black; margin: 0; border: black 1px solid; height: 40px; box-shadow: 2px 2px #888888;"
-                        >
-                            {{isset($bookings[$i]) ? isset($bookings[$i]->users[3]) ? $bookings[$i]->users[3]->name : '' : ''}}
-                        </a>
+                        @if(isset($bookings[$i]) && isset($bookings[$i]->users[0]))
+                            <div
+                               class="alert alert-success col-sm-6 col-md-2"
+                               style="color: black; padding: 7px 0 5px 28px; margin: 0 5px 0 40px; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
+                            >
+                            {{$bookings[$i]->users[0]->name}}
+                            </div>
+                        @else
+                            <a rel="modal:open" href="#ex1" data-oraraio="{{$i}}"
+                               class="btn btn-success col-sm-6 col-md-2"
+                               style="margin: 0 5px 0 40px; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
+                            >
+                            </a>
+                        @endif
+
+                        @if(isset($bookings[$i]) && isset($bookings[$i]->users[1]))
+                            <div
+                                class="alert alert-success col-sm-6 col-md-2"
+                                style="color: black; padding: 7px 0 5px 28px; margin: 0; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
+                            >
+                                {{$bookings[$i]->users[1]->name}}
+                            </div>
+                        @else
+                            <a rel="modal:open" href="#ex1" data-oraraio="{{$i}}"
+                               class="btn btn-success col-sm-6 col-md-2"
+                               style="color: black; margin: 0; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
+                            >
+                            </a>
+                        @endif
+
+                        @if(isset($bookings[$i]) && isset($bookings[$i]->users[2]))
+                            <div
+                                class="alert alert-success col-sm-6 col-md-2"
+                               style="color: black; padding: 7px 0 5px 28px; margin: 0 5px; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
+                            >
+                                {{$bookings[$i]->users[2]->name}}
+                            </div>
+                        @else
+                            <a rel="modal:open" href="#ex1" data-oraraio="{{$i}}"
+                               class="btn btn-success col-sm-6 col-md-2"
+                               style="color: black; margin: 0 5px; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
+                            >
+                            </a>
+                        @endif
+
+                        @if(isset($bookings[$i]) && isset($bookings[$i]->users[3]))
+                            <div
+                                class="alert alert-success col-sm-6 col-md-2"
+                                style="color: black; margin: 0; padding: 7px 0 5px 28px; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
+                            >
+                                {{$bookings[$i]->users[3]->name}}
+                            </div>
+                        @else
+                            <a rel="modal:open" href="#ex1" data-oraraio="{{$i}}"
+                               class="btn btn-success col-sm-6 col-md-2"
+                               style="color: black; margin: 0; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
+                            >
+                            </a>
+                        @endif
 
                         @if(isset($bookings[$i]))
-                        <div
+                        <div id="esiste{{$i}}"
                             class="alert alert-info col-sm-6 col-md-1"
                             style="padding: 8px; color: black; margin: 0 0 0 40px; border: black 1px solid; box-shadow: 2px 2px #888888;"
                         >
                             {{$bookings[$i]->tipo}}
                         </div>
+                            @else
+                            <div id="esiste{{$i}}"></div>
                         @endif
                     </div>
 
@@ -81,3 +96,35 @@
     </section>
 @endsection
 
+@section('footer')
+    @parent
+    <script>
+        $('document').ready(function () {
+            $('.btn-success').on("click", function () {
+                let orario = $(this).data('oraraio');
+                $("#orariosel").html( orario );
+                let id = 'esiste'+orario;
+                let esiste = $("#"+id).html().trim();
+                if(esiste == 'Singolare'){
+                    $("#btnDoppio").css('display', 'none');
+                    $("#btnSingolare").css('display', 'block');
+                } else if(esiste == 'Doppio'){
+                    $("#btnSingolare").css('display', 'none');
+                    $("#btnDoppio").css('display', 'block');
+                } else {
+                    $("#btnDoppio").css('display', 'block');
+                    $("#btnSingolare").css('display', 'block');
+                }
+            });
+
+            $('.esegui').on("click", function () {
+                let orario = $("#orariosel").html();
+                let tipo = $(this).data('tipo');
+                let url = "{{route('prenota', ['giorno'=>$giorno, 'ora'=>":orario", 'campo' => $campo, 'tipo' => ':tipo'])}}";
+                url = url.replace(':orario', orario);
+                url = url.replace(':tipo', tipo);
+                $(this).attr('href', url)
+            });
+        });
+    </script>
+@endsection
