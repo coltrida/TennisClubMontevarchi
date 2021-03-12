@@ -12,16 +12,15 @@
                      style="border: black 1px solid; box-shadow: 2px 2px #888888; background-image: url(/img/bg3.jpg)">
                     <div class="row">
                         <div class="alert alert-success col-sm-6 col-md-2"
-                             style="padding: 8px; color: black; margin: 0 10px; width: 120px; border: black 1px solid; box-shadow: 2px 2px #888888;"
+                             style="padding: 5px; color: black; margin: 0 10px; width: 120px; border: black 1px solid; box-shadow: 2px 2px #888888;"
                         >
-                            {{$i}}:00 - {{$i+1}}:00
-                            {{--<a href="#ex1" rel="modal:open">Open Modal</a>--}}
+                            <span style="font-size: 20px">{{$i}}:00 - {{$i+1}}:00</span>
                         </div>
 
                         @if(isset($bookings[$i]) && isset($bookings[$i]->users[0]))
                             <div
-                               class="alert alert-success col-sm-6 col-md-2"
-                               style="color: black; padding: 7px 0 5px 28px; margin: 0 5px 0 40px; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
+                               class="alert  col-sm-6 col-md-2"
+                               style="background-color: white; color: black; padding: 7px 0 5px 28px; margin: 0 5px 0 40px; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
                             >
                             {{$bookings[$i]->users[0]->name}}
                             </div>
@@ -35,8 +34,8 @@
 
                         @if(isset($bookings[$i]) && isset($bookings[$i]->users[1]))
                             <div
-                                class="alert alert-success col-sm-6 col-md-2"
-                                style="color: black; padding: 7px 0 5px 28px; margin: 0; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
+                                class="alert col-sm-6 col-md-2"
+                                style="background-color: white; color: black; padding: 7px 0 5px 28px; margin: 0; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
                             >
                                 {{$bookings[$i]->users[1]->name}}
                             </div>
@@ -50,8 +49,8 @@
 
                         @if(isset($bookings[$i]) && isset($bookings[$i]->users[2]))
                             <div
-                                class="alert alert-success col-sm-6 col-md-2"
-                               style="color: black; padding: 7px 0 5px 28px; margin: 0 5px; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
+                                class="alert col-sm-6 col-md-2"
+                               style="background-color: white; color: black; padding: 7px 0 5px 28px; margin: 0 5px; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
                             >
                                 {{$bookings[$i]->users[2]->name}}
                             </div>
@@ -65,8 +64,8 @@
 
                         @if(isset($bookings[$i]) && isset($bookings[$i]->users[3]))
                             <div
-                                class="alert alert-success col-sm-6 col-md-2"
-                                style="color: black; margin: 0; padding: 7px 0 5px 28px; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
+                                class="alert col-sm-6 col-md-2"
+                                style="background-color: white; color: black; margin: 0; padding: 7px 0 5px 28px; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
                             >
                                 {{$bookings[$i]->users[3]->name}}
                             </div>
@@ -80,8 +79,8 @@
 
                         @if(isset($bookings[$i]))
                         <div id="esiste{{$i}}"
-                            class="alert alert-info col-sm-6 col-md-1"
-                            style="padding: 8px; color: black; margin: 0 0 0 40px; border: black 1px solid; box-shadow: 2px 2px #888888;"
+                            class="alert alert-warning col-sm-6 col-md-1"
+                            style="padding: 8px 8px 8px 12px; color: black; margin: 0 0 0 40px; border: black 1px solid; box-shadow: 2px 2px #888888;"
                         >
                             {{$bookings[$i]->tipo}}
                         </div>
@@ -100,6 +99,9 @@
     @parent
     <script>
         $('document').ready(function () {
+
+            $('div.messaggio').fadeOut(5000);
+
             $('.btn-success').on("click", function () {
                 let orario = $(this).data('oraraio');
                 $("#orariosel").html( orario );

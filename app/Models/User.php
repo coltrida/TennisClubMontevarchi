@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use function config;
+use function throw_if;
 
 class User extends Authenticatable
 {
@@ -56,6 +58,36 @@ class User extends Authenticatable
     public function getHasPrivilegiAttribute()
     {
         return $this->tipo === config('enum.tipo.PRIVILEGI') || $this->tipo === config('enum.tipo.ILLIMITATI');
+    }
+
+    /**
+     * Ritorna true se è un Privilegiato.
+     *
+     * @return  bool
+     */
+    public function getIsPrivilegiAttribute()
+    {
+        return $this->tipo === config('enum.tipo.PRIVILEGI');
+    }
+
+    /**
+     * Ritorna true se Illimitato.
+     *
+     * @return  bool
+     */
+    public function getIsIllimitatiAttribute()
+    {
+        return $this->tipo === config('enum.tipo.ILLIMITATI');
+    }
+
+    /**
+     * Ritorna eta.
+     *
+     * @return  int
+     */
+    public function getEtaAttribute()
+    {
+        return Carbon::now()->year - $this->anno;
     }
 
     public function bookings()

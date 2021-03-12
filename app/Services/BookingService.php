@@ -8,6 +8,7 @@ use App\Models\Booking;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use phpDocumentor\Reflection\Types\Boolean;
+use function config;
 use function dd;
 
 class BookingService
@@ -26,7 +27,10 @@ class BookingService
 
     public function createPrenotazione($giorno, $ora, $campo, $tipo)
     {
-        $res = true;
+        if(!$this->verficaCredito($tipo))
+        {
+            return false;
+        }
         $prenotazioneEsistente = $this->prentazioneEsistente($giorno, $ora, $campo);
         if (!$prenotazioneEsistente)
         {
@@ -35,6 +39,114 @@ class BookingService
             $res = $this->aggiornaPrenotazioneEsistente($prenotazioneEsistente);
         }
         return $res;
+    }
+
+    private function verficaCredito($tipo)
+    {
+        $user = Auth::user();
+        if ($user->isIllimitati)
+        // ------------------ illimitato --------------------------------
+        {
+            $user->ore_privilegi--;
+            if ($user->ore_privilegi < 0 )
+            {
+                $user->ore_privilegi = 0;
+            }
+            $user->save();
+            return true;
+        } else
+            // ----------------------privilegiato -----------------------------
+            if ($user->isPrivilegi)
+            {
+                $user->ore_privilegi--;
+                if ($user->ore_privilegi < 0 )
+                // ------------ il privilegiato deve pagare con i soldi ------------------
+                {
+                    $user->ore_privilegi = 0;
+                    if ($tipo == 'Singolare'){
+                        // --------------------------- Privilegiato Singolare --------------------------
+                        if($user->credito >= config('enum.costi.STANDARD_SINGOLO'))
+                        {
+                            $user->credito -= config('enum.costi.STANDARD_SINGOLO');
+                            $user->save();
+                            return true;
+                        } else {
+                            // ----------------- credito insufficiente per il singolo --------
+                            return false;
+                        }
+                    } else {
+                        // -----------------------------Privilegiato Doppio -----------------------------
+                        if($user->credito >= config('enum.costi.STANDARD_DOPPIO'))
+                        {
+                            $user->credito -= config('enum.costi.STANDARD_DOPPIO');
+                            $user->save();
+                            return true;
+                        } else {
+                            // ----------------- credito insufficiente per il doppio --------
+                            return false;
+                        }
+                    }
+                } else {
+                    // ---------------- il privilegiato paga con i privilegi -------------------------
+                    $user->save();
+                    return true;
+                }
+            } else {
+                   // ----------------------------- utente normale -----------------------------
+                    if ($user->eta < 18)
+                    // ---------------------------- utente normale minorenne -----------------------------
+                    {
+                        if ($tipo == 'Singolare'){
+                            // --------------------------- minorenne Singolare --------------------------
+                            if($user->credito >= config('enum.costi.MINORENNI_SINGOLO'))
+                            {
+                                $user->credito -= config('enum.costi.MINORENNI_SINGOLO');
+                                $user->save();
+                                return true;
+                            } else {
+                                // ----------------- credito insufficiente per il singolo --------
+                                return false;
+                            }
+                        } else {
+                            // -----------------------------minorenne Doppio -----------------------------
+                            if($user->credito >= config('enum.costi.MINORENNI_DOPPIO'))
+                            {
+                                $user->credito -= config('enum.costi.MINORENNI_DOPPIO');
+                                $user->save();
+                                return true;
+                            } else {
+                                // ----------------- credito insufficiente per il doppio --------
+                                return false;
+                            }
+                        }
+                    } else
+                        {
+                            // -------------------- utente normale standard ---------------------
+                            if ($tipo == 'Singolare'){
+                                // --------------------------- standard Singolare --------------------------
+                                if($user->credito >= config('enum.costi.MINORENNI_SINGOLO'))
+                                {
+                                    $user->credito -= config('enum.costi.MINORENNI_SINGOLO');
+                                    $user->save();
+                                    return true;
+                                } else {
+                                    // ----------------- credito insufficiente per il singolo --------
+                                    return false;
+                                }
+                            } else {
+                                // -----------------------------standard Doppio -----------------------------
+                                if($user->credito >= config('enum.costi.MINORENNI_DOPPIO'))
+                                {
+                                    $user->credito -= config('enum.costi.MINORENNI_DOPPIO');
+                                    $user->save();
+                                    return true;
+                                } else {
+                                    // ----------------- credito insufficiente per il doppio --------
+                                    return false;
+                                }
+                            }
+                        }
+            }
     }
 
     private function creaNuovaPrenotazione($giorno, $ora, $campo, $tipo)
@@ -53,7 +165,8 @@ class BookingService
 
     private function aggiornaPrenotazioneEsistente($prenotazioneEsistente)
     {
-        return $prenotazioneEsistente->users()->attach(Auth::id());
+        $prenotazioneEsistente->users()->attach(Auth::id());
+        return true;
     }
 
     private function prentazioneEsistente($giorno, $ora, $campo)

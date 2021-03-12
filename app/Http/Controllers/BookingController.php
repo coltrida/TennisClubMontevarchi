@@ -21,7 +21,7 @@ class BookingController extends Controller
     public function prenota($giorno, $ora, $campo, $tipo, BookingService $bookingService)
     {
         if(!$bookingService->createPrenotazione($giorno, $ora, $campo, $tipo)) {
-            return redirect()->back()->withMessage('Errore nella prenotazione');
+            return redirect()->back()->withMessage('Errore nella prenotazione - Credito insufficiente');
         }
         return redirect()->back()->withMessage('Prenotazione effettuata');
     }

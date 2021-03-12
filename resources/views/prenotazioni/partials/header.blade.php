@@ -12,6 +12,7 @@
                 <h2><i class="fas fa-arrow-circle-right"></i></h2>
             </a>
         </div>
+        @include('prenotazioni.partials.messaggio')
     </div>
 
     <div>
