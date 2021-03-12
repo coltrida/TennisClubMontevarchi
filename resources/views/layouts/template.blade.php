@@ -99,9 +99,14 @@
                 @guest
                     <strong>Next Game:</strong> <div id="clock"></div>
                 @else
-                    <strong>Credito: € {{Auth::user()->credito}}</strong>
+                    <span class="badge" style="background-color: blue; font-size: 17px">
+                        <strong>Credito: € {{Auth::user()->credito}}</strong>
+                    </span>
+
                     @if(Auth::user()->hasprivilegi)
-                        <strong> - Privilegi: {{Auth::user()->privilegi}}</strong>
+                        <span class="badge" style="background-color: blue; font-size: 17px">
+                            <strong> Privilegi: {{Auth::user()->ore_privilegi}}</strong>
+                        </span>
                     @endif
                 @endguest
             </div>
@@ -207,7 +212,7 @@
                                     <li><a href="index-2.html">Eliminazioni Particolari</a></li>
                                     <li><a href="index-3.html">Lista Soci</a></li>
                                 @else
-                                    <li><a href="index.html">Annulla Prenotazioni</a></li>
+                                    <li><a href="index.html">Elimina ora</a></li>
                                 @endif
                                 <li><a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

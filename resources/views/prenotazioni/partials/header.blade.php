@@ -17,12 +17,12 @@
 
     <div>
         <a href="{{route('prenotazioni', ['giorno' => $giorno, 'campo' => 'Campo1'])}}"
-           class="btn btn-info" style="border: black solid 1px; box-shadow: 2px 2px rgba(43,43,43,0.93)" type="submit">Campo 1</a>
+           class="btn btn-info" style="background-color:blue; border: black solid 1px; box-shadow: 2px 2px rgba(43,43,43,0.93)" type="submit">Campo 1</a>
         <a href="{{route('prenotazioni', ['giorno' => $giorno, 'campo' => 'Campo2'])}}"
-           class="btn btn-info" style="border: black solid 1px; box-shadow: 2px 2px rgba(43,43,43,0.93)" type="submit">Campo 2</a>
+           class="btn btn-info" style="background-color:blue; border: black solid 1px; box-shadow: 2px 2px rgba(43,43,43,0.93)" type="submit">Campo 2</a>
         <a href="{{route('prenotazioni', ['giorno' => $giorno, 'campo' => 'Campo3'])}}"
-           class="btn btn-info" style="border: black solid 1px; box-shadow: 2px 2px rgba(43,43,43,0.93)" type="submit">Campo 3</a>
+           class="btn btn-info" style="background-color:blue; border: black solid 1px; box-shadow: 2px 2px rgba(43,43,43,0.93)" type="submit">Campo 3</a>
         <a href="{{route('prenotazioni', ['giorno' => $giorno, 'campo' => 'Campo4'])}}"
-           class="btn btn-info" style="border: black solid 1px; box-shadow: 2px 2px rgba(43,43,43,0.93)" type="submit">Campo 4</a>
+           class="btn btn-info" style="background-color:blue; border: black solid 1px; box-shadow: 2px 2px rgba(43,43,43,0.93)" type="submit">Campo 4</a>
     </div>
 </div>

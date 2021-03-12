@@ -14,7 +14,13 @@
                         <div class="alert alert-success col-sm-6 col-md-2"
                              style="padding: 5px; color: black; margin: 0 10px; width: 120px; border: black 1px solid; box-shadow: 2px 2px #888888;"
                         >
-                            <span style="font-size: 20px">{{$i}}:00 - {{$i+1}}:00</span>
+                            @if($campo == 'Campo1' || $campo == 'Campo2')
+                                <span style="font-size: 20px">{{$i}}:00 - {{$i+1}}:00</span>
+                            @else
+                                <span style="font-size: 20px">{{$i}}:30 - {{$i+1}}:30</span>
+                            @endif
+
+
                         </div>
 
                         @if(isset($bookings[$i]) && isset($bookings[$i]->users[0]))
@@ -55,11 +61,19 @@
                                 {{$bookings[$i]->users[2]->name}}
                             </div>
                         @else
-                            <a rel="modal:open" href="#ex1" data-oraraio="{{$i}}"
-                               class="btn btn-success col-sm-6 col-md-2"
-                               style="color: black; margin: 0 5px; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
-                            >
-                            </a>
+                            @if(isset($bookings[$i]) && $bookings[$i]->tipo == 'Singolare')
+                                <div
+                                   class="col-sm-6 col-md-2"
+                                   style="opacity: 0; color: black; margin: 0 5px; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
+                                >
+                                </div>
+                            @else
+                                <a rel="modal:open" href="#ex1" data-oraraio="{{$i}}"
+                                   class="btn btn-success col-sm-6 col-md-2"
+                                   style="color: black; margin: 0 5px; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
+                                >
+                                </a>
+                            @endif
                         @endif
 
                         @if(isset($bookings[$i]) && isset($bookings[$i]->users[3]))
@@ -70,17 +84,26 @@
                                 {{$bookings[$i]->users[3]->name}}
                             </div>
                         @else
-                            <a rel="modal:open" href="#ex1" data-oraraio="{{$i}}"
-                               class="btn btn-success col-sm-6 col-md-2"
-                               style="color: black; margin: 0; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
-                            >
-                            </a>
+                            @if(isset($bookings[$i]) && $bookings[$i]->tipo == 'Singolare')
+                                <div
+                                   class="col-sm-6 col-md-2"
+                                   style="opacity: 0; color: black; margin: 0; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
+                                >
+                                </div>
+                            @else
+                                <a rel="modal:open" href="#ex1" data-oraraio="{{$i}}"
+                                   class="btn btn-success col-sm-6 col-md-2"
+                                   style="color: black; margin: 0; border: black 1px solid; height: 40px; box-shadow: 2px 2px rgba(43,43,43,0.93);"
+                                >
+
+                                </a>
+                            @endif
                         @endif
 
                         @if(isset($bookings[$i]))
                         <div id="esiste{{$i}}"
                             class="alert alert-warning col-sm-6 col-md-1"
-                            style="padding: 8px 8px 8px 12px; color: black; margin: 0 0 0 40px; border: black 1px solid; box-shadow: 2px 2px #888888;"
+                            style="background-color: greenyellow; padding: 8px 8px 8px 12px; color: black; margin: 0 0 0 40px; border: black 1px solid; box-shadow: 2px 2px #888888;"
                         >
                             {{$bookings[$i]->tipo}}
                         </div>
