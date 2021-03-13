@@ -14,5 +14,6 @@ Route::group(
     ],
     function(){
         Route::get('/prenotazioni/{giorno}/{campo}', [BookingController::class, 'visualizzaPrenotazioni'])->name('prenotazioni');
+        Route::get('/prenotazioni2/{giorno}/{campo}', [BookingController::class, 'visualizzaPrenotazioni2'])->name('prenotazioni2');
         Route::get('/prenotazioni/{giorno}/{ora}/{campo}/{tipo}', [BookingController::class, 'prenota'])->name('prenota');
     });

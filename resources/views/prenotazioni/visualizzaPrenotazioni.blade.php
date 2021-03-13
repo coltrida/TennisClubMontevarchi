@@ -107,7 +107,7 @@
                         >
                             {{$bookings[$i]->tipo}}
                         </div>
-                            @else
+                        @else
                             <div id="esiste{{$i}}"></div>
                         @endif
                     </div>
