@@ -187,4 +187,15 @@ class BookingService
     {
         return Carbon::create($giorno)->subDay()->format('Y-m-d');
     }
+
+    public function isAvailable($giorno)
+    {
+        if(Auth::user()->isAdmin) {
+            return true;
+        }
+        $giornosel = Carbon::make($giorno);
+        $ieri = Carbon::now()->subDay();
+        $limite = Carbon::now()->addDays(7);
+        return $giornosel < $limite && $giornosel >= $ieri;
+    }
 }

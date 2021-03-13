@@ -99,15 +99,7 @@
                 @guest
                     <strong>Next Game:</strong> <div id="clock"></div>
                 @else
-                    <span class="badge" style="background-color: blue; font-size: 17px">
-                        <strong>Credito: € {{Auth::user()->credito}}</strong>
-                    </span>
-
-                    @if(Auth::user()->hasprivilegi)
-                        <span class="badge" style="background-color: blue; font-size: 17px">
-                            <strong> Privilegi: {{Auth::user()->ore_privilegi}}</strong>
-                        </span>
-                    @endif
+                    @include('partials.infoCreditoPrivilegi')
                 @endguest
             </div>
         </div>
@@ -315,7 +307,7 @@
                         <h3><img class="logo-img" src="{{asset('img/logo.png')}}" alt="Logo" /></h3>
                         <ul class="list-styled list-bordered">
                             <li><strong>Address:</strong><br/>310 Ashfield Ave, Suburbia, Brisbane, Australia, 4000 </li>
-                            <li><a href="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d28369.415587766056!2d152.98820641500242!3d-27.276331333808365!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b93fb9c9442c901%3A0x10b5aa2f23d9e4e1!2sAshford+Circuit%2C+Petrie+QLD+4502!5e0!3m2!1sen!2sau!4v1406620130126" class="fancybox fancybox.iframe">View on map</a></li>
+                            <li><a href="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d28369.415587766056!2d152.98820641500242!3d-27.276331333808365!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b93fb9c9442c901%3A0x10b5aa2f23d9e4e1!2sAshford+Circuit%2C+Petrie+QLD+4502!5e0!3m2!1sen!2sau!4v1406620130126" class="fancybox fancybox.iframe">Vedi sulla mappa</a></li>
                         </ul>
                     </div>
                 </div>
@@ -332,13 +324,6 @@
                 <div>&copy; ColtriCat <span class="copy-year"></span>. All rights reserved.</div>
             </div>
 
-            {{--<div class="foot-right">
-                <ul class="social-links">
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-globe"></i></a></li>
-                </ul>
-            </div>--}}
         </div>
     </footer>
 </div><!--/footer -->

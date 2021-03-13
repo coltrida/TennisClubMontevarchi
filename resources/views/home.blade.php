@@ -445,13 +445,6 @@
     @parent
     <script>
         $('document').ready(function () {
-            /*$('#datepicker').datepicker({
-                format: "dd/mm/yyyy",
-                weekStart: 1,
-                language: "it",
-                daysOfWeekHighlighted: "0,6",
-                todayHighlight: true
-            });*/
 
             let today = new Date();
             let dd = String(today.getDate()).padStart(2, '0');
@@ -461,13 +454,13 @@
             today = yyyy + '-' + mm + '-' + dd;
             $('#giorno').val(today);
 
-            let url = '{{route('prenotazioni', [":today", 'Campo1'])}}';
+            let url = '{{route('prenotazioni2', [":today", 'Campo1'])}}';
             url = url.replace(':today', today);
             $('#button').attr("href", url);
 
             $('#giorno').on('change', function (ele) {
                 let nuovoGiorno = ele.target.value;
-                url = '{{route('prenotazioni', [":nuovoGiorno", 'Campo1'])}}';
+                url = '{{route('prenotazioni2', [":nuovoGiorno", 'Campo1'])}}';
                 url = url.replace(':nuovoGiorno', nuovoGiorno);
                 $('#button').attr("href", url);
             })

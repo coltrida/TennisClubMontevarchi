@@ -23,7 +23,8 @@ class BookingController extends Controller
         $bookings = $bookingService->showPrenotazioni($giorno, $campo);
         $ieri = $bookingService->ieri($giorno);
         $domani = $bookingService->domani($giorno);
-        return view('prenotazioni.visualizzaPrenotazioni2', compact('bookings', 'giorno', 'campo', 'ieri', 'domani'));
+        $isAvailable = $bookingService->isAvailable($giorno);
+        return view('prenotazioni.visualizzaPrenotazioni2', compact('bookings', 'isAvailable', 'giorno', 'campo', 'ieri', 'domani'));
     }
 
     public function prenota($giorno, $ora, $campo, $tipo, BookingService $bookingService)

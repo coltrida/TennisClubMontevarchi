@@ -4,18 +4,18 @@
 @include('prenotazioni.partials.singolodoppio2')
     <main>
 
-        <section class=" text-center container">
+        <section class=" text-center">
             <div class="row ">
                 <div class="col-lg-8 col-md-8 mx-auto">
-                    <div style="display: flex; justify-content: center; align-items: center">
-                        <div style="margin-right: 10px"><h1 class="fw-light">{{$campo}}</h1></div>
-                        <div style="display: flex; justify-content: space-between; align-items: center">
+                    <div style="display: flex; justify-content: space-around; align-items: center">
+                        <div><h2 class="fw-light card-body shadow">{{$campo}}</h2></div>
+                        <div class="mx-2" style="display: flex; justify-content: space-between; align-items: center">
                             <div>
                                 <a href="{{route('prenotazioni2', ['giorno' => $ieri, 'campo' => $campo])}}">
                                     <h2><i class="fas fa-arrow-circle-left"></i></h2>
                                 </a>
                             </div>
-                            <div style="margin: 0 10px"><h3 class="fw-light">{{$giorno}}</h3></div>
+                            <div style="margin: 0 10px"><h3 class="fw-light">{{ Carbon\Carbon::make($giorno)->format('d/m/Y') }}</h3></div>
                             <div>
                                 <a href="{{route('prenotazioni2', ['giorno' => $domani, 'campo' => $campo])}}">
                                     <h2><i class="fas fa-arrow-circle-right"></i></h2>
@@ -24,17 +24,22 @@
                         </div>
                     </div>
 
-                    <p class="lead text-muted"></p>
-                    <p>
-                        <a href="{{route('prenotazioni2', ['giorno' => $giorno, 'campo' => 'Campo1'])}}"
-                            class="btn {{$campo == 'Campo1' ? 'btn-primary' : 'btn-secondary'}} my-2">Campo 1</a>
-                        <a href="{{route('prenotazioni2', ['giorno' => $giorno, 'campo' => 'Campo2'])}}"
-                           class="btn {{$campo == 'Campo2' ? 'btn-primary' : 'btn-secondary'}} my-2">Campo 2</a>
-                        <a href="{{route('prenotazioni2', ['giorno' => $giorno, 'campo' => 'Campo3'])}}"
-                           class="btn {{$campo == 'Campo3' ? 'btn-primary' : 'btn-secondary'}} my-2">Campo 3</a>
-                        <a href="{{route('prenotazioni2', ['giorno' => $giorno, 'campo' => 'Campo4'])}}"
-                           class="btn {{$campo == 'Campo4' ? 'btn-primary' : 'btn-secondary'}} my-2">Campo 4</a>
-                    </p>
+                    <div class="row row-cols-2 row-cols-md-6 gx-1" style="display: flex; margin-bottom: 20px; align-items: center" >
+                        <div class="col">
+                            <a href="{{route('index')}}"
+                               class="btn btn-success shadow">Home</a>
+                        </div>
+                        <div class="col">@include('partials.infoCreditoPrivilegi')</div>
+                        <div class="col"><a href="{{route('prenotazioni2', ['giorno' => $giorno, 'campo' => 'Campo1'])}}"
+                                            class="btn shadow {{$campo == 'Campo1' ? 'btn-primary' : 'btn-secondary'}} my-2">Campo 1</a></div>
+                        <div class="col"><a href="{{route('prenotazioni2', ['giorno' => $giorno, 'campo' => 'Campo2'])}}"
+                                            class="btn shadow {{$campo == 'Campo2' ? 'btn-primary' : 'btn-secondary'}} my-2">Campo 2</a></div>
+                        <div class="col"><a href="{{route('prenotazioni2', ['giorno' => $giorno, 'campo' => 'Campo3'])}}"
+                                            class="btn shadow {{$campo == 'Campo3' ? 'btn-primary' : 'btn-secondary'}} my-2">Campo 3</a></div>
+                        <div class="col"><a href="{{route('prenotazioni2', ['giorno' => $giorno, 'campo' => 'Campo4'])}}"
+                                            class="btn shadow {{$campo == 'Campo4' ? 'btn-primary' : 'btn-secondary'}} my-2">Campo 4</a></div>
+
+                    </div>
                 </div>
             </div>
         </section>
@@ -68,9 +73,15 @@
                     @else
                         <div class="col">
                             <div class="card shadow">
-                                <a class="card-body btn btn-primary" data-oraraio="{{$i}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    <p class="card-text ">&nbsp;</p>
-                                </a>
+                                @if($isAvailable)
+                                    <a class="card-body btn btn-primary" data-oraraio="{{$i}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <p class="card-text ">&nbsp;</p>
+                                    </a>
+                                @else
+                                    <a class="card-body btn btn-primary" data-oraraio="{{$i}}"  data-bs-target="#exampleModal">
+                                        <p class="card-text ">&nbsp;</p>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     @endif
@@ -86,9 +97,15 @@
                     @else
                         <div class="col">
                             <div class="card shadow">
-                                <a class="card-body btn btn-primary" data-oraraio="{{$i}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    <p class="card-text ">&nbsp;</p>
-                                </a>
+                                @if($isAvailable)
+                                    <a class="card-body btn btn-primary" data-oraraio="{{$i}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <p class="card-text ">&nbsp;</p>
+                                    </a>
+                                @else
+                                    <a class="card-body btn btn-primary" data-oraraio="{{$i}}"  data-bs-target="#exampleModal">
+                                        <p class="card-text ">&nbsp;</p>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     @endif
@@ -107,9 +124,15 @@
                         @else
                             <div class="col">
                                 <div class="card shadow">
-                                    <a class="card-body btn btn-primary" data-oraraio="{{$i}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        <p class="card-text ">&nbsp;</p>
-                                    </a>
+                                    @if($isAvailable)
+                                        <a class="card-body btn btn-primary" data-oraraio="{{$i}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            <p class="card-text ">&nbsp;</p>
+                                        </a>
+                                    @else
+                                        <a class="card-body btn btn-primary" data-oraraio="{{$i}}"  data-bs-target="#exampleModal">
+                                            <p class="card-text ">&nbsp;</p>
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         @endif
@@ -129,9 +152,15 @@
                         @else
                             <div class="col">
                                 <div class="card shadow">
-                                    <a class="card-body btn btn-primary" data-oraraio="{{$i}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        <p class="card-text ">&nbsp;</p>
-                                    </a>
+                                    @if($isAvailable)
+                                        <a class="card-body btn btn-primary" data-oraraio="{{$i}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            <p class="card-text ">&nbsp;</p>
+                                        </a>
+                                    @else
+                                        <a class="card-body btn btn-primary" data-oraraio="{{$i}}"  data-bs-target="#exampleModal">
+                                            <p class="card-text ">&nbsp;</p>
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         @endif
@@ -141,7 +170,7 @@
                         <div class="col">
                             <div class="card shadow bg-warning">
                                 <div class="card-body">
-                                    <p class="card-text" id="esiste{{$i}}">{{$bookings[$i]->tipo}}</p>
+                                    <p class="card-text text-center" id="esiste{{$i}}">{{$bookings[$i]->tipo}}</p>
                                 </div>
                             </div>
                         </div>
