@@ -11,9 +11,12 @@
                 <p>Giorno: {{$giorno}}</p>
                 <p>Orario: <span id="orariosel"></span> </p>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center">
+                <div style="display: flex">
+                    <a data-tipo="Singolare" class="btn btn-info esegui" id="btnSingolare">Singolare</a>
+                    <a data-tipo="Doppio" class="btn btn-info esegui mx-1" id="btnDoppio">Doppio</a>
+                </div>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

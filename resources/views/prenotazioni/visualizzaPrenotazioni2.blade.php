@@ -1,7 +1,7 @@
 @extends('layouts.template-visualizza')
 
 @section('container')
-@include('prenotazioni.partials.messaggio2')
+@include('prenotazioni.partials.singolodoppio2')
     <main>
 
         <section class=" text-center container">
@@ -141,10 +141,12 @@
                         <div class="col">
                             <div class="card shadow bg-warning">
                                 <div class="card-body">
-                                    <p class="card-text ">{{$bookings[$i]->tipo}}</p>
+                                    <p class="card-text" id="esiste{{$i}}">{{$bookings[$i]->tipo}}</p>
                                 </div>
                             </div>
                         </div>
+                    @else
+                        <div id="esiste{{$i}}"></div>
                     @endif
                 </div>
                 @endfor
