@@ -176,8 +176,8 @@
             <!-- Start Widget Section -->
             <section class="row page-section">
                 <div class="col-sm-6">
-                    <h3>Welcome To Our Club</h3>
-                    <p class="lead">Cras justo odiomi porta gravida curab diam eget risus varius sitnon magna rutrum dolor auctor.</p>
+                    <h3>Benvenuto nel nostro Circolo</h3>
+                    <p class="lead">Il più antico e prestigioso Circolo Sportivo per il Tennis della provincia di Arezzo</p>
                     <p>Morbi leo risus, porta ac conse ctetur ac, vestibulum at erosite. Aenean lacinia bibendum nulsed consectetur. Nullam quis risusa eget urna mollis s lacus vel augue laoreet rutrum fauci leo Duis mollis, est non commodo luctus, nisi erat porttito. Fusce dapibus, tellus ac cursus conbi leo risus…</p>
                     <p><img src="{{asset('img/signature.png')}}" alt="Signature" style="max-width: 207px;" /></p>
                     <p class="feat-color"><strong>Joseph Gamble</strong> <em>- Club President</em></p>

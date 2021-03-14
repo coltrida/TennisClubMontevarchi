@@ -122,37 +122,11 @@
 
                 <ul class="menuzord-menu head-right">
 
-                    <li><a href="layout-grid.html">Blog Layouts</a>
+                    <li><a href="layout-grid.html">Informazioni</a>
                         <ul class="dropdown">
-                            <li><a href="layout-grid.html">Grid Layouts</a>
-                                <ul class="dropdown dropdown-left">
-                                    <li><a href="layout-grid-2.html">Grid 2 Column</a></li>
-                                    <li><a href="layout-grid-3.html">Grid 3 Column</a></li>
-                                    <li><a href="layout-grid-4.html">Grid 4 Column</a></li>
-                                    <li><a href="layout-bricks.html">Grid Bricks</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="layout-side-left.html">Sidebar Layouts</a>
-                                <ul class="dropdown dropdown-left">
-                                    <li><a href="layout-side-left.html">Sidebar left</a></li>
-                                    <li><a href="layout-side-right.html">Sidebar Right</a></li>
-                                    <li><a href="layout-side-left-right.html">Sidebar Left &amp; Right</a></li>
-                                    <li><a href="layout-side-mini-main.html">Sidebar Mini &amp; Main</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="post-standard.html">Post Layouts</a>
-                                <ul class="dropdown dropdown-left">
-                                    <li><a href="post-standard.html">Post Standard</a></li>
-                                    <li><a href="post-video.html">Post Video</a></li>
-                                    <li><a href="post-gallery.html">Post Gallery</a></li>
-                                    <li><a href="post-review.html">Post Review</a></li>
-                                    <li><a href="post-feature.html">Post Big Feature</a></li>
-                                    <li><a href="post-feature-parallax.html">Post Parallax Feature</a></li>
-                                    <li><a href="post-narrow.html">Post Narrow</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="archive-list.html">Archive List</a></li>
-                            <li><a href="archive-standard.html">Archive Standard</a></li>
+                            <li><a href="layout-grid.html">Regolamento</a></li>
+                            <li><a href="layout-side-left.html">Listino Prezzi</a></li>
+                            <li><a href="post-standard.html">Organigramma</a></li>
                         </ul>
                     </li>
                     @guest
@@ -200,8 +174,8 @@
 
                             <ul class="dropdown">
                                 @if(Auth::user()->isAdmin)
-                                    <li><a href="index.html">Prenotazioni Particolari</a></li>
-                                    <li><a href="index-2.html">Eliminazioni Particolari</a></li>
+                                    <li><a href="{{route('prenotazioniParticolari')}}">Prenotazioni Particolari</a></li>
+                                    <li><a href="{{route('eliminazioniParticolari')}}">Eliminazioni Particolari</a></li>
                                     <li><a href="index-3.html">Lista Soci</a></li>
                                 @else
                                     <li><a href="index.html">Elimina ora</a></li>
@@ -244,7 +218,7 @@
             </div>
 
             <div class="head-right">
-                <em class="fa fa-phone-square feat-color"></em> 1432 543 654
+                <em class="fa fa-phone-square feat-color"></em> 055 978 9366
             </div>
         </div>
     </nav>
@@ -272,8 +246,8 @@
                     <div class="widget widget-contact">
                         <h3>Contattaci</h3>
                         <ul class="list-styled list-bordered">
-                            <li><strong>Telefono:</strong><br/>+61 555 555 1234</li>
-                            <li><strong>Facsimile:</strong><br/>+61 555 555 1234</li>
+                            <li><strong>Telefono:</strong><br/>055 978 9366</li>
+                            <li><strong>Facs:</strong><br/>055 978 9366</li>
                             <li><a href="#">info@tcmontevarchi.it</a></li>
                         </ul>
                     </div>
@@ -306,8 +280,8 @@
                     <div class="widget widget-brand-address">
                         <h3><img class="logo-img" src="{{asset('img/logo.png')}}" alt="Logo" /></h3>
                         <ul class="list-styled list-bordered">
-                            <li><strong>Address:</strong><br/>310 Ashfield Ave, Suburbia, Brisbane, Australia, 4000 </li>
-                            <li><a href="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d28369.415587766056!2d152.98820641500242!3d-27.276331333808365!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b93fb9c9442c901%3A0x10b5aa2f23d9e4e1!2sAshford+Circuit%2C+Petrie+QLD+4502!5e0!3m2!1sen!2sau!4v1406620130126" class="fancybox fancybox.iframe">Vedi sulla mappa</a></li>
+                            <li><strong>Indirizzo:</strong><br/>Via Maestri del Lavoro, 3 - 52025 Montevarchi AR </li>
+                            <li><a target="_blank" href="https://goo.gl/maps/CsLpwzcf2A9N1aWX9">Vedi sulla mappa</a></li>
                         </ul>
                     </div>
                 </div>
