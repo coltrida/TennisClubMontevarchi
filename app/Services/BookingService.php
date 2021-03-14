@@ -4,12 +4,13 @@
 namespace App\Services;
 
 
+use App\Mail\BookingCreazioneEmail;
 use App\Models\Booking;
+use App\Models\BookingUser;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use phpDocumentor\Reflection\Types\Boolean;
+use Illuminate\Support\Facades\Mail;
 use function config;
-use function dd;
 
 class BookingService
 {
@@ -35,8 +36,10 @@ class BookingService
         if (!$prenotazioneEsistente)
         {
             $res = $this->creaNuovaPrenotazione($giorno, $ora, $campo, $tipo);
+            Mail::to('coltrida@gmail.com')->queue(new BookingCreazioneEmail($giorno, $ora, $campo, $tipo));
         } else {
             $res = $this->aggiornaPrenotazioneEsistente($prenotazioneEsistente);
+            Mail::to('coltrida@gmail.com')->queue(new BookingCreazioneEmail($giorno, $ora, $campo, $tipo));
         }
         return $res;
     }
@@ -197,5 +200,26 @@ class BookingService
         $ieri = Carbon::now()->subDay();
         $limite = Carbon::now()->addDays(7);
         return $giornosel < $limite && $giornosel >= $ieri;
+    }
+
+    public function listaEliminabili()
+    {
+        $oggi = Carbon::now()->format('Y-m-d');
+        return Booking::with('users:id')->where([
+            ['giorno', '>' ,$oggi]
+        ])->get();
+    }
+
+    public function eliminaPrenotazione($id)
+    {
+        $booking = Booking::with('users')->find($id);
+        $res = BookingUser::where('booking_id', $id)->where('user_id', Auth::id());
+        $res->first()->delete();
+
+        if ($res->count() == 0)
+        {
+            $booking->delete();
+        }
+        return $res;
     }
 }

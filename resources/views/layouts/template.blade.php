@@ -178,7 +178,7 @@
                                     <li><a href="{{route('eliminazioniParticolari')}}">Eliminazioni Particolari</a></li>
                                     <li><a href="index-3.html">Lista Soci</a></li>
                                 @else
-                                    <li><a href="index.html">Elimina ora</a></li>
+                                    <li><a href="{{route('listaEliminabili')}}">Elimina ora</a></li>
                                 @endif
                                 <li><a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

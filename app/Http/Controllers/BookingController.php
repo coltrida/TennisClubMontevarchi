@@ -6,6 +6,7 @@ use App\Http\Requests\BookingRequest;
 use App\Services\BookingService;
 use function compact;
 use function dd;
+use function redirect;
 use function view;
 
 class BookingController extends Controller
@@ -33,5 +34,19 @@ class BookingController extends Controller
             return redirect()->back()->withMessage('Errore nella prenotazione - Credito insufficiente');
         }
         return redirect()->back()->withMessage('Prenotazione effettuata');
+    }
+
+    public function listaEliminabili(BookingService $bookingService)
+    {
+        $bookings = $bookingService->listaEliminabili();
+        return view('prenotazioni.listaEliminabili', compact('bookings'));
+    }
+
+    public function eliminaPrenotazione($id, BookingService $bookingService)
+    {
+        if(!$bookingService->eliminaPrenotazione($id)) {
+            return redirect()->back()->withMessage('Errore nella eliminazione');
+        }
+        return redirect()->back()->withMessage('Eliminazione effettuata');
     }
 }
