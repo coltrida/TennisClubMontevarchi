@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontController::class, 'index'])->name('index');
+Route::get('/regolamento', [FrontController::class, 'regolamento'])->name('regolamento');
+Route::get('/listino', [FrontController::class, 'listinoPrezzi'])->name('listino');
+Route::get('/organigramma', [FrontController::class, 'organigramma'])->name('organigramma');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/iniziaCoda', function () {
@@ -34,4 +37,6 @@ Route::group(
         Route::post('/prenotazioniParticolari/', [AdminController::class, 'setPrenotazioniParticolari'])->name('setPrenotazioniParticolari');
         Route::get('/eliminazioniParticolari/', [AdminController::class, 'eliminazioniParticolari'])->name('eliminazioniParticolari');
         Route::post('/eliminazioniParticolari/', [AdminController::class, 'setEliminazioniParticolari'])->name('setEliminazioniParticolari');
+        Route::get('/disabilitaCampo', [AdminController::class, 'disabilitaCampo'])->name('disabilitaCampo');
+        Route::get('/setDisabilitaCampo/{id}', [AdminController::class, 'setDisabilitaCampo'])->name('setDisabilitaCampo');
     });

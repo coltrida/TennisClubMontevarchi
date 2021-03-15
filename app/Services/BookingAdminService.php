@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\Booking;
+use App\Models\Field;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use function dd;
@@ -97,6 +98,13 @@ class BookingAdminService
             $prenotazione->delete();
         }
         return $res;
+    }
+
+    public function toggleCampo($id)
+    {
+        $campo = Field::find($id);
+        $campo->disponibile == 0 ? $campo->disponibile = 1 : $campo->disponibile = 0;
+        $campo->save();
     }
 
 }

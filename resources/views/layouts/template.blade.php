@@ -122,11 +122,11 @@
 
                 <ul class="menuzord-menu head-right">
 
-                    <li><a href="layout-grid.html">Informazioni</a>
+                    <li><a href="#">Informazioni</a>
                         <ul class="dropdown">
-                            <li><a href="layout-grid.html">Regolamento</a></li>
-                            <li><a href="layout-side-left.html">Listino Prezzi</a></li>
-                            <li><a href="post-standard.html">Organigramma</a></li>
+                            <li><a href="{{route('regolamento')}}">Regolamento</a></li>
+                            <li><a href="{{route('listino')}}">Listino Prezzi</a></li>
+                            <li><a href="{{route('organigramma')}}">Organigramma</a></li>
                         </ul>
                     </li>
                     @guest
@@ -176,7 +176,9 @@
                                 @if(Auth::user()->isAdmin)
                                     <li><a href="{{route('prenotazioniParticolari')}}">Prenotazioni Particolari</a></li>
                                     <li><a href="{{route('eliminazioniParticolari')}}">Eliminazioni Particolari</a></li>
-                                    <li><a href="index-3.html">Lista Soci</a></li>
+                                    <li><a href="{{route('disabilitaCampo')}}">Disabilita Campo</a></li>
+                                    <li><a href="index-3.html">Ricarica Socio</a></li>
+                                    <li><a href="index-3.html">Storna Socio</a></li>
                                 @else
                                     <li><a href="{{route('listaEliminabili')}}">Elimina ora</a></li>
                                 @endif

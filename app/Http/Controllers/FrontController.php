@@ -11,4 +11,19 @@ class FrontController extends Controller
     {
         return view('home');
     }
+
+    public function regolamento()
+    {
+        return view('regolamento');
+    }
+
+    public function listinoPrezzi()
+    {
+        return view('listino');
+    }
+
+    public function organigramma()
+    {
+        return view('organigramma');
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Field;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -83,7 +84,56 @@ class DatabaseSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
                 'password' => Hash::make('123456'),
-            ]
+            ],
+            [
+                'name' => 'NonSocio Standard',
+                'username' => 'nonsociostandard',
+                'email' => 'nonsociostandard@cacao.it',
+                'anno' => 1975,
+                'tipo' => config('enum.tipo.NONSOCIO'),
+                'ore_privilegi' => 0,
+                'credito' => 100,
+                'email_verified_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+                'password' => Hash::make('123456'),
+            ],
+            [
+                'name' => 'NonSocio Minorenne',
+                'username' => 'nonsociominorenne',
+                'email' => 'nonsociominorenne@cacao.it',
+                'anno' => 2010,
+                'tipo' => config('enum.tipo.NONSOCIO'),
+                'ore_privilegi' => 0,
+                'credito' => 100,
+                'email_verified_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+                'password' => Hash::make('123456'),
+            ],
+        ]);
+
+        Field::insert([
+            [
+                'nome' => 'Campo1',
+                'disponibile' => true,
+            ],
+            [
+                'nome' => 'Campo2',
+                'disponibile' => true,
+            ],
+            [
+                'nome' => 'Campo3',
+                'disponibile' => true,
+            ],
+            [
+                'nome' => 'Campo4',
+                'disponibile' => true,
+            ],
+            [
+                'nome' => 'Campo5',
+                'disponibile' => true,
+            ],
         ]);
     }
 }

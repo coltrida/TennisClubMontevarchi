@@ -17,7 +17,7 @@
                     <tbody>
                     @foreach($bookings as $booking)
                         <tr style="border: rgba(0,0,0,0.61) 1px solid">
-                            <td>{{$booking->giorno}} - {{$booking->id}}</td>
+                            <td>{{$booking->giorno}}</td>
                             <td>{{$booking->orainizio}}</td>
                             <td>{{$booking->campo}}</td>
                             <td>

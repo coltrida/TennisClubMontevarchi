@@ -2,6 +2,7 @@
 
 @section('container')
 @include('prenotazioni.partials.singolodoppio2')
+@include('prenotazioni.partials.messaggio2')
     <main>
 
         <section class=" text-center">
@@ -24,21 +25,22 @@
                         </div>
                     </div>
 
-                    <div class="row row-cols-2 row-cols-md-6 gx-1" style="display: flex; margin-bottom: 20px; align-items: center" >
+                    <div class="row row-cols-2 row-cols-md-6 gx-1" style="display: flex;  align-items: center" >
                         <div class="col">
                             <a href="{{route('index')}}"
                                class="btn btn-success shadow">Home</a>
                         </div>
-                        <div class="col">@include('partials.infoCreditoPrivilegi')</div>
-                        <div class="col"><a href="{{route('prenotazioni2', ['giorno' => $giorno, 'campo' => 'Campo1'])}}"
-                                            class="btn shadow {{$campo == 'Campo1' ? 'btn-primary' : 'btn-secondary'}} my-2">Campo 1</a></div>
-                        <div class="col"><a href="{{route('prenotazioni2', ['giorno' => $giorno, 'campo' => 'Campo2'])}}"
-                                            class="btn shadow {{$campo == 'Campo2' ? 'btn-primary' : 'btn-secondary'}} my-2">Campo 2</a></div>
-                        <div class="col"><a href="{{route('prenotazioni2', ['giorno' => $giorno, 'campo' => 'Campo3'])}}"
-                                            class="btn shadow {{$campo == 'Campo3' ? 'btn-primary' : 'btn-secondary'}} my-2">Campo 3</a></div>
-                        <div class="col"><a href="{{route('prenotazioni2', ['giorno' => $giorno, 'campo' => 'Campo4'])}}"
-                                            class="btn shadow {{$campo == 'Campo4' ? 'btn-primary' : 'btn-secondary'}} my-2">Campo 4</a></div>
 
+                        @for($j = 0; $j < count(config('enum.campi')); $j++)
+                            <div class="col">
+                                <a href="{{route('prenotazioni2', ['giorno' => $giorno, 'campo' => config('enum.campi')[$j]])}}"
+                                                class="btn shadow {{$campo == config('enum.campi')[$j] ? 'btn-primary' : 'btn-secondary'}} my-2">{{config('enum.campi')[$j]}}</a>
+                            </div>
+                        @endfor
+
+                    </div>
+                    <div class="row row-cols-2 row-cols-md-6 gx-1" style="display: flex; justify-content: space-around; margin: 5px 0; align-items: center" >
+                        @include('partials.infoCreditoPrivilegi')
                     </div>
                 </div>
             </div>
@@ -198,8 +200,11 @@
     @parent
     <script>
         $('document').ready(function () {
-
-            $('div.messaggio').fadeOut(5000);
+            let messaggio = "{{session()->get('message')}}";
+                if (messaggio != '') {
+                    $('#messaggioModal').modal('toggle');
+                    setTimeout(function(){ $('#messaggioModal').modal('toggle') }, 3000);
+                }
 
             $('.btn-primary').on("click", function () {
                 let orario = $(this).data('oraraio');

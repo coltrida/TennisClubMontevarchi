@@ -81,6 +81,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Ritorna true se Non socio.
+     *
+     * @return  bool
+     */
+    public function getIsNonsocioAttribute()
+    {
+        return $this->tipo === config('enum.tipo.NONSOCIO');
+    }
+
+    /**
      * Ritorna eta.
      *
      * @return  int
