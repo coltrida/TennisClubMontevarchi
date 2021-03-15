@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BookingAdminRequest;
+use App\Http\Requests\CreditoSocioRequest;
 use App\Models\Field;
+use App\Models\User;
 use App\Services\BookingAdminService;
+use App\Services\UserService;
+use Symfony\Component\HttpFoundation\Request;
 use function compact;
+use function dd;
 use function redirect;
 use function view;
 
@@ -56,6 +61,30 @@ class AdminController extends Controller
     public function setDisabilitaCampo($id, BookingAdminService $bookingAdminService)
     {
         $bookingAdminService->toggleCampo($id);
+        return redirect()->back();
+    }
+
+    public function ricaricaSocio()
+    {
+        $soci = User::orderBy('name')->get();
+        return view('admin.ricaricaSocio', compact('soci'));
+    }
+
+    public function setRicaricaSocio(CreditoSocioRequest $request, UserService $userService)
+    {
+        $userService->ricaricaCredito($request);
+        return redirect()->back();
+    }
+
+    public function stornaSocio()
+    {
+        $soci = User::orderBy('name')->get();
+        return view('admin.stornaSocio', compact('soci'));
+    }
+
+    public function setStornaSocio(CreditoSocioRequest $request, UserService $userService)
+    {
+        $userService->stornaCredito($request);
         return redirect()->back();
     }
 }

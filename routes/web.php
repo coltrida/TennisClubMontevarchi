@@ -39,4 +39,8 @@ Route::group(
         Route::post('/eliminazioniParticolari/', [AdminController::class, 'setEliminazioniParticolari'])->name('setEliminazioniParticolari');
         Route::get('/disabilitaCampo', [AdminController::class, 'disabilitaCampo'])->name('disabilitaCampo');
         Route::get('/setDisabilitaCampo/{id}', [AdminController::class, 'setDisabilitaCampo'])->name('setDisabilitaCampo');
+        Route::get('/ricaricaSocio', [AdminController::class, 'ricaricaSocio'])->name('ricaricaSocio');
+        Route::post('/ricaricaSocio', [AdminController::class, 'setRicaricaSocio'])->name('setRicaricaSocio');
+        Route::get('/stornaSocio', [AdminController::class, 'stornaSocio'])->name('stornaSocio');
+        Route::post('/stornaSocio', [AdminController::class, 'setStornaSocio'])->name('setStornaSocio');
     });

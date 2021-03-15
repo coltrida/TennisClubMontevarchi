@@ -50,6 +50,7 @@
     <!-- Place RTL Style Sheet here -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css"  />
 
     <!--[if lt IE 9]>
     <script src="./library/bs/js/html5shiv.min.js"></script>
@@ -177,8 +178,8 @@
                                     <li><a href="{{route('prenotazioniParticolari')}}">Prenotazioni Particolari</a></li>
                                     <li><a href="{{route('eliminazioniParticolari')}}">Eliminazioni Particolari</a></li>
                                     <li><a href="{{route('disabilitaCampo')}}">Disabilita Campo</a></li>
-                                    <li><a href="index-3.html">Ricarica Socio</a></li>
-                                    <li><a href="index-3.html">Storna Socio</a></li>
+                                    <li><a href="{{route('ricaricaSocio')}}">Ricarica Socio</a></li>
+                                    <li><a href="{{route('stornaSocio')}}">Storna Socio</a></li>
                                 @else
                                     <li><a href="{{route('listaEliminabili')}}">Elimina ora</a></li>
                                 @endif
@@ -360,6 +361,7 @@
 <!-- Scripts Go -->
 <script src="{{asset('js/validate-contact.js')}}"></script>
 <script src="{{asset('js/scripts.js')}}"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 
 @show
 </body>
