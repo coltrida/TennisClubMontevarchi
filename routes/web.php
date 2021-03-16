@@ -11,6 +11,9 @@ Route::get('/regolamento', [FrontController::class, 'regolamento'])->name('regol
 Route::get('/listino', [FrontController::class, 'listinoPrezzi'])->name('listino');
 Route::get('/organigramma', [FrontController::class, 'organigramma'])->name('organigramma');
 Route::get('/resetPassword', [FrontController::class, 'resetPassword'])->name('resetPassword');
+Route::post('/resetPassword', [FrontController::class, 'inviaResetPassword'])->name('inviaResetPassword');
+Route::get('/reimpostaPassword/{id}', [FrontController::class, 'reimpostaPassword'])->name('reimpostaPassword');
+Route::post('/reimpostaPassword', [FrontController::class, 'setReimpostaPassword'])->name('setReimpostaPassword');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/iniziaCoda', function () {

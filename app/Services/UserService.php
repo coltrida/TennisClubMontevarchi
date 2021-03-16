@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use function dd;
 use function trim;
 use Illuminate\Support\Str;
@@ -40,5 +41,12 @@ class UserService
             'tipo' => $request->input('tipo'),
             'ore_privilegi' => $request->input('privilegi')
         ]);
+    }
+
+    public function reimpostaPassword($request)
+    {
+        $user = User::find($request->id);
+        $user->password = Hash::make($request->password);
+        return $user->save();
     }
 }
