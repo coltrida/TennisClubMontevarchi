@@ -26,4 +26,9 @@ class FrontController extends Controller
     {
         return view('organigramma');
     }
+
+    public function resetPassword()
+    {
+        return view('resetPassword');
+    }
 }

@@ -175,7 +175,7 @@
                                         </div>
                                         <button type="submit" class="btn btn-default">Login</button>
                                     </form>
-                                    <a style="margin: auto" href="#">Password Dimenticata</a>
+                                    <a style="margin: auto" href="{{route('resetPassword')}}">Password Dimenticata</a>
                                 </div>
                             </div><!--/.row -->
                         </div>
