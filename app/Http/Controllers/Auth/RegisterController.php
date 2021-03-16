@@ -8,6 +8,9 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use function dd;
+use function trim;
+use function ucfirst;
 
 class RegisterController extends Controller
 {
@@ -48,13 +51,15 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
+{
+    return Validator::make($data, [] /*[
+        'name' => ['required', 'string', 'max:255'],
+        'cognome' => ['required', 'string', 'max:255'],
+        'anno' => ['required', 'int', 'max:4'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
+    ]*/);
+}
 
     /**
      * Create a new user instance after a valid registration.
@@ -64,10 +69,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $nominativo = trim(ucfirst($data['nome']).' '.ucfirst($data['cognome']));
+        $user = User::where([
+                ['name', $nominativo],
+                ['anno', $data['anno']]
+            ])->first();
+        $user->username = trim($data['username']);
+        $user->email = trim($data['email']);
+        $user->password = Hash::make($data['password']);
+        $user->save();
+
+        return $user;
     }
 }

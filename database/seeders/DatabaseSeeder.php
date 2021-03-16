@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         User::insert([
             [
-                'name' => 'Davide Coltrioli',
-                'username' => 'cacao',
+                'name' => 'Tc Montavarchi',
+                'username' => 'admin',
                 'email' => 'cacao@cacao.it',
                 'anno' => 1975,
                 'tipo' => config('enum.tipo.ADMIN'),
@@ -112,25 +112,6 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('123456'),
             ],
         ]);
-
-        for ($i = 5; $i < 200; $i++)
-        {
-            User::insert([
-                [
-                    'name' => 'cacao'.$i,
-                    'username' => 'cacao'.$i,
-                    'email' => "cacao$i@cacao.it",
-                    'anno' => 1975,
-                    'tipo' => config('enum.tipo.STANDARD'),
-                    'ore_privilegi' => 0,
-                    'credito' => 100,
-                    'email_verified_at' => now(),
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                    'password' => Hash::make('123456'),
-                ]
-                ]);
-        }
 
         Field::insert([
             [

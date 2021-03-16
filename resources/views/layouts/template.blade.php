@@ -67,14 +67,30 @@
     <!-- Content Container -->
     <div class="container" data-anijs="if: scroll, on:window, do: fadeInDown animated, before: scrollReveal, after: $fireOnce removeAnim ">
         <h2>Registrazione</h2>
-        <form class="search-hero">
+        <form class="search-hero" action="{{ route('register') }}" method="post">
+            @csrf
             <label class="input">
                 <input type="text" name="nome" class="form-control" placeholder="Nome">
             </label>
             <label class="input">
-                <input type="text" name="anno" class="form-control" placeholder="Anno di nascita">
+                <input type="text" name="cognome" class="form-control" placeholder="Cognome">
             </label>
-            <button class="btn btn-success" type="button">Iscrizione</button>
+            <label class="input">
+                <input type="text" name="username" class="form-control" placeholder="username">
+            </label>
+            <label class="input">
+                <input type="text" name="anno" class="form-control" placeholder="Anno di nascita - yyyy">
+            </label>
+            <label class="input">
+                <input type="email" name="email" class="form-control" placeholder="e-mail">
+            </label>
+            <label class="input">
+                <input type="password" name="password" class="form-control" placeholder="password">
+            </label>
+            <label class="input">
+                <input type="password" name="password_confirmed" class="form-control" placeholder="conferma password">
+            </label>
+            <button class="btn btn-success" type="submit">Iscrizione</button>
         </form>
 
     </div>
@@ -140,8 +156,8 @@
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
                                         <div class="form-group">
-                                            <label class="sr-only" >Email address</label>
-                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
+                                            <label class="sr-only" >Username</label>
+                                            <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="username">
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -159,13 +175,14 @@
                                         </div>
                                         <button type="submit" class="btn btn-default">Login</button>
                                     </form>
+                                    <a style="margin: auto" href="#">Password Dimenticata</a>
                                 </div>
                             </div><!--/.row -->
                         </div>
                     </li>
 
                     <li class="overlay-tigger">
-                        <a class="overlay-btn btn-open" href="#"><em class="fa fa-user"></em></a>
+                        <a class="overlay-btn btn-open" href="#" title="Registrazione"><em class="fa fa-user"></em></a>
                     </li>
                     @else
                         <li>
@@ -180,6 +197,7 @@
                                     <li><a href="{{route('disabilitaCampo')}}">Disabilita Campo</a></li>
                                     <li><a href="{{route('ricaricaSocio')}}">Ricarica Socio</a></li>
                                     <li><a href="{{route('stornaSocio')}}">Storna Socio</a></li>
+                                    <li><a href="{{route('inserisciSocio')}}">Inserisci Socio</a></li>
                                 @else
                                     <li><a href="{{route('listaEliminabili')}}">Elimina ora</a></li>
                                 @endif
@@ -250,7 +268,7 @@
                         <h3>Contattaci</h3>
                         <ul class="list-styled list-bordered">
                             <li><strong>Telefono:</strong><br/>055 978 9366</li>
-                            <li><strong>Facs:</strong><br/>055 978 9366</li>
+                            <li><strong>Fax:</strong><br/>055 978 9366</li>
                             <li><a href="#">info@tcmontevarchi.it</a></li>
                         </ul>
                     </div>

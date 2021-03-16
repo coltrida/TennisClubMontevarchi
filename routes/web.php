@@ -43,4 +43,6 @@ Route::group(
         Route::post('/ricaricaSocio', [AdminController::class, 'setRicaricaSocio'])->name('setRicaricaSocio');
         Route::get('/stornaSocio', [AdminController::class, 'stornaSocio'])->name('stornaSocio');
         Route::post('/stornaSocio', [AdminController::class, 'setStornaSocio'])->name('setStornaSocio');
+        Route::get('/inserisciSocio', [AdminController::class, 'inserisciSocio'])->name('inserisciSocio');
+        Route::post('/inserisciSocio', [AdminController::class, 'setInserisciSocio'])->name('setInserisciSocio');
     });

@@ -25,8 +25,9 @@
                     </tbody>
                 </table>
                 <div style="display: flex; justify-content: space-around; align-items: center">
-                    <div>
-                        <select name="importo" class="form-control">
+                    <div style="display: flex; justify-content: center; align-items: center">
+                        <label for="importo" style="margin-right: 10px"><h3>Importo:</h3></label>
+                        <select name="importo" id="importo" class="form-control" style="border: black 1px solid">
                             @foreach($tagli = config('enum.tagli') as $taglio)
                                 <option value="{{$taglio}}">{{$taglio}}</option>
                             @endforeach

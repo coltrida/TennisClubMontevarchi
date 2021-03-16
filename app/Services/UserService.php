@@ -6,6 +6,8 @@ namespace App\Services;
 
 use App\Models\User;
 use function dd;
+use function trim;
+use Illuminate\Support\Str;
 
 class UserService
 {
@@ -25,5 +27,18 @@ class UserService
             $user->credito -= (float)$request->importo;
             $user->save();
         }
+    }
+
+    public function inserisciSocio($request)
+    {
+        $nomelow = Str::lower($request->input('nome'));
+        $cognomelow = Str::lower($request->input('cognome'));
+        $nominativo = trim(Str::ucfirst($nomelow).' '.ucfirst(Str::ucfirst($cognomelow)));
+        return User::create([
+            'name' => $nominativo,
+            'anno' => $request->input('anno'),
+            'tipo' => $request->input('tipo'),
+            'ore_privilegi' => $request->input('privilegi')
+        ]);
     }
 }

@@ -4,8 +4,8 @@ use App\Models\Field;
 
 return [
     'tipo' => [
-        'ADMIN' => "admin",
         'STANDARD' => "standard",
+        'ADMIN' => "admin",
         'ILLIMITATI' => "illimitati",
         'PRIVILEGI' => "privilegi",
         'NONSOCIO' => "nonsocio",

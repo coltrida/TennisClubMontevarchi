@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BookingAdminRequest;
 use App\Http\Requests\CreditoSocioRequest;
+use App\Http\Requests\InsertSocioRequest;
 use App\Models\Field;
 use App\Models\User;
 use App\Services\BookingAdminService;
@@ -86,5 +87,20 @@ class AdminController extends Controller
     {
         $userService->stornaCredito($request);
         return redirect()->back();
+    }
+
+    public function inserisciSocio()
+    {
+        return view('admin.inserisciSocio');
+    }
+
+    public function setInserisciSocio(InsertSocioRequest $request, UserService $userService)
+    {
+
+        if(!$userService->inserisciSocio($request))
+        {
+            return redirect()->back()->withMessage('Errore nella creazione del socio');
+        }
+        return redirect()->back()->withMessage('Socio Creato');
     }
 }
