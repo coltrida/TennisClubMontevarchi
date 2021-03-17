@@ -12,6 +12,7 @@ use App\Models\Field;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use function activity;
 use function config;
 use function dd;
 
@@ -39,11 +40,11 @@ class BookingService
         if (!$prenotazioneEsistente)
         {
             $res = $this->creaNuovaPrenotazione($giorno, $ora, $campo, $tipo);
-            Mail::to(Auth::user()->email)->send(new PrenotazioneOra($giorno, $ora, $campo, $tipo, Auth::user()->credito));
         } else {
             $res = $this->aggiornaPrenotazioneEsistente($prenotazioneEsistente);
-            Mail::to(Auth::user()->email)->send(new PrenotazioneOra($giorno, $ora, $campo, $tipo, Auth::user()->credito));
         }
+        Mail::to(Auth::user()->email)->send(new PrenotazioneOra($giorno, $ora, $campo, $tipo, Auth::user()->credito));
+        activity()->log("L'utente ".Auth::user()->name." ha prenotato il ".$campo." per il giorno ".$giorno." alle ore ".$ora." (".$tipo.")");
         return $res;
     }
 
@@ -269,9 +270,13 @@ class BookingService
     public function listaEliminabili()
     {
         $oggi = Carbon::now()->format('Y-m-d');
-        return Booking::with('users:id')->where([
+        return Booking::with('users:id')->whereHas('users', function ($query) {
+            return $query->where('user_id', Auth::id());
+        })->where([
             ['giorno', '>' ,$oggi]
         ])->get();
+
+        //dd($res);
     }
 
     public function eliminaPrenotazione($id)
@@ -280,8 +285,9 @@ class BookingService
         $this->ridareCredito($booking->tipo);
         $res = BookingUser::where('booking_id', $id)->where('user_id', Auth::id());
         $res->first()->delete();
+        activity()->log("L'utente ".Auth::user()->name." ha cancellato la prenotazione con id: ".$booking->id." per il giorno ".$booking->giorno." alle ore ".$booking->orainizio." (".$booking->tipo.")");
 
-        if ($res->count() == 0)
+        if ($booking->users->count() == 0)
         {
             $booking->delete();
         }

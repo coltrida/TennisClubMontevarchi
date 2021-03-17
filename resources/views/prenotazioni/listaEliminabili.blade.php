@@ -27,7 +27,7 @@
 
                                     </a>
                                     @if($booking->users->count() > 1)
-                                        <span title="Sei presente {{$booking->users->count()}} volte in questa prenotazione" class="badge">{{$booking->users->count()}}</span>
+                                        <span title="Ci sono {{$booking->users->count()}} partecipanti a questa prenotazione" class="badge">{{$booking->users->count()}}</span>
                                     @endif
                                 </div>
 

@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         User::insert([
             [
-                'name' => 'Tc Montavarchi',
+                'name' => 'Tc Montevarchi',
                 'username' => 'admin',
-                'email' => 'cacao@cacao.it',
+                'email' => 'coltrida@gmail.com',
                 'anno' => 1975,
                 'tipo' => config('enum.tipo.ADMIN'),
                 'ore_privilegi' => 7,

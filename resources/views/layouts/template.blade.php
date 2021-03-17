@@ -198,6 +198,7 @@
                                     <li><a href="{{route('ricaricaSocio')}}">Ricarica Socio</a></li>
                                     <li><a href="{{route('stornaSocio')}}">Storna Socio</a></li>
                                     <li><a href="{{route('inserisciSocio')}}">Inserisci Socio</a></li>
+                                    <li><a href="{{route('logging')}}">Log</a></li>
                                 @else
                                     <li><a href="{{route('listaEliminabili')}}">Elimina ora</a></li>
                                 @endif

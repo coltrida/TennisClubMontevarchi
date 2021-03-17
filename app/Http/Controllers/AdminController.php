@@ -9,6 +9,7 @@ use App\Models\Field;
 use App\Models\User;
 use App\Services\BookingAdminService;
 use App\Services\UserService;
+use Spatie\Activitylog\Models\Activity;
 use Symfony\Component\HttpFoundation\Request;
 use function compact;
 use function dd;
@@ -102,5 +103,11 @@ class AdminController extends Controller
             return redirect()->back()->withMessage('Errore nella creazione del socio');
         }
         return redirect()->back()->withMessage('Socio Creato');
+    }
+
+    public function logging()
+    {
+        $logs = Activity::latest()->get();
+        return view('admin.logging', compact('logs'));
     }
 }

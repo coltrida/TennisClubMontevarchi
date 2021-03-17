@@ -49,4 +49,5 @@ Route::group(
         Route::post('/stornaSocio', [AdminController::class, 'setStornaSocio'])->name('setStornaSocio');
         Route::get('/inserisciSocio', [AdminController::class, 'inserisciSocio'])->name('inserisciSocio');
         Route::post('/inserisciSocio', [AdminController::class, 'setInserisciSocio'])->name('setInserisciSocio');
+        Route::get('/log', [AdminController::class, 'logging'])->name('logging');
     });
