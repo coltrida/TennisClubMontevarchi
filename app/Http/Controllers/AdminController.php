@@ -45,13 +45,13 @@ class AdminController extends Controller
     {
         if(!$bookingAdminService->prenotazioneParticolare($request))
         {
-            return redirect()->back()->withMessage('Errore nella prenotazione');
+            return redirect()->back()->withMessage('Errore nella eliminazione');
         }
         return redirect()->route('prenotazioni2',
             [
                 'giorno' => $request->input('giornoPartenza'),
                 'campo' => $request->input('campo')
-            ])->withMessage('Prenotazione effettuata');
+            ])->withMessage('Eliminazione effettuata');
     }
 
     public function disabilitaCampo()

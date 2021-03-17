@@ -8,6 +8,7 @@ use App\Models\Booking;
 use App\Models\Field;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use function activity;
 use function dd;
 
 class BookingAdminService
@@ -79,6 +80,8 @@ class BookingAdminService
         if ($res){
             $prenotazione->users()->attach(Auth::id());
             $prenotazione->users()->attach(Auth::id());
+            activity()->log("L'utente ".Auth::user()->name." ha effettuato la prenotazione particolare per il campo: ".$campo." - alle ore: ".$oraOn." del giorno: ".$giorno->format('d/m/Y'));
+
         }
         return $res;
 
@@ -96,6 +99,8 @@ class BookingAdminService
             $prenotazione->users()->detach(Auth::id());
             $prenotazione->users()->detach(Auth::id());
             $prenotazione->delete();
+            activity()->log("L'utente ".Auth::user()->name." ha effettuato la cancellazione particolare per il campo: ".$campo." - alle ore: ".$oraOn." del giorno: ".$giorno->format('d/m/Y'));
+
         }
         return $res;
     }
@@ -105,6 +110,7 @@ class BookingAdminService
         $campo = Field::find($id);
         $campo->disponibile == 0 ? $campo->disponibile = 1 : $campo->disponibile = 0;
         $campo->save();
+        activity()->log("L'utente ".Auth::user()->name." ha modificato lo stato del campo: ".$campo->nome." - ora è in stato ".$campo->disponibile);
     }
 
 }

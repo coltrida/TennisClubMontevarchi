@@ -10,10 +10,9 @@
                 <div class="row">
                     <div class="col">
                         <select class="form-control" style="border: 1px black solid" name="campo">
-                            <option value="Campo1">Campo 1</option>
-                            <option value="Campo2">Campo 2</option>
-                            <option value="Campo3">Campo 3</option>
-                            <option value="Campo4">Campo 4</option>
+                            @foreach(config('enum.campi') as $campo)
+                                <option value="{{$campo}}">{{$campo}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

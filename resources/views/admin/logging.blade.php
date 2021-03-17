@@ -7,14 +7,14 @@
                 <table id="logs" class="display" style="width:100%">
                     <thead>
                     <tr>
-                        <th>Data</th>
+                        <th>Data - Ora</th>
                         <th>Azione</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($logs as $log)
                         <tr>
-                            <td>{{$log->created_at->format('d/m/Y')}}</td>
+                            <td>{{$log->created_at->format('d/m/Y - H:i:s')}}</td>
                             <td>{{$log->description}}</td>
                         </tr>
                     @endforeach
@@ -28,7 +28,9 @@
     @parent
     <script>
         $('document').ready(function () {
-            $('#logs').DataTable();
+            $('#logs').DataTable({
+                "order": [[ 0, 'des' ]]
+            });
         });
     </script>
 @endsection

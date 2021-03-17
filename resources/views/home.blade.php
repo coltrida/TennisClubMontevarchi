@@ -178,12 +178,12 @@
                 <div class="col-sm-6">
                     <h3>Benvenuto nel nostro Circolo</h3>
                     <p class="lead">Il più antico e prestigioso Circolo Sportivo per il Tennis della provincia di Arezzo</p>
-                    <p>
+                    <p style="text-align: justify">
                         L'attuale Tennis Club Montevarchi vanta antiche tradizioni sportive.
                         Sono passati più di 80 anni da quando per la prima volta nella provincia di Arezzo, due giocatori racchette in pugno, rigorosamente vestiti di bianco con pantaloni lunghi e camicia, si sfidarono su un campo di terra rossa per disputare un incontro di Tennis.
+                        L'avvenimento ebbe luogo a Montevarchi nello spazio dell'attuale Piazza della Repubblica dove nel 1928 fu costruito il primo campo da tennis adiacente al campo sportivo, intitolato al campione del mondo di automobilismo, Conte Gastone Brilli Peri.
                     </p>
-                    <p><img src="{{asset('img/signature.png')}}" alt="Signature" style="max-width: 207px;" /></p>
-                    <p class="feat-color"><strong>Joseph Gamble</strong> <em>- Club President</em></p>
+                    <p class="feat-color"><strong>Nardi</strong> <em>- Presidente del Circolo</em></p>
                 </div>
 
                 <div class="col-sm-3">
@@ -255,9 +255,9 @@
                 <div class="item">
                     <br/>
                     <blockquote class="col-xs-9 text-center scale-125 float-none">
-                        “An athlete cannot run with money in his pockets. He must run with hope in his heart and dreams in his head ”
+                        “Niente panchina, niente bordo campo, nessun angolo neutrale. Ci sei solo tu, nudo!”
                         <footer>
-                            <cite class="feat-color" title="Emil Zatopek">Emil Zatopek -
+                            <cite class="feat-color" title="Emil Zatopek">Andre Agassi -
                                 <small class="feat-color">
                                     <em class="fa fa-star"></em><em class="fa fa-star"></em><em class="fa fa-star"></em>
                                 </small>
@@ -268,9 +268,9 @@
                 <div class="item">
                     <br/>
                     <blockquote class="col-xs-9 text-center scale-125 float-none">
-                        “This guy is the best quarter back our game has seen in generations and what's better is he is only getting started ”
+                        “La differenza fra me e Guy Forget? Lui faceva ace sul 15-0 , io sul 30-40”
                         <footer>
-                            <cite class="feat-color" title="Rick Hooley">Rick Hooley -
+                            <cite class="feat-color" title="Rick Hooley">Boris Becker -
                                 <small class="feat-color">
                                     <em class="fa fa-star"></em><em class="fa fa-star"></em><em class="fa fa-star"></em><em class="fa fa-star"></em><em class="fa fa-star"></em>
                                 </small>
