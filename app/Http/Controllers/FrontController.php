@@ -22,17 +22,17 @@ class FrontController extends Controller
 
     public function regolamento()
     {
-        return view('regolamento');
+        return view('front.regolamento');
     }
 
     public function listinoPrezzi()
     {
-        return view('listino');
+        return view('front.listino');
     }
 
     public function organigramma()
     {
-        return view('organigramma');
+        return view('front.organigramma');
     }
 
     public function resetPassword()

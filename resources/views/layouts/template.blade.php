@@ -226,15 +226,15 @@
         <div class="container">
             <div class="head-left">
                 <ul class="mini-nav">
-                    <li><a href="index.html">Home</a></li>
+                    {{--<li><a href="index.html">Home</a></li>
                     <li><a href="layout-grid.html">Blog</a>
                         <ul class="mini-sub-menu">
                             <li><a href="index.html">Home</a></li>
                             <li><a href="layout-grid.html">Blog</a></li>
                             <li><a href="contact.html">Contact</a></li>
                         </ul>
-                    </li>
-                    <li><a href="contact.html">Contact</a></li>
+                    </li>--}}
+                    <li><a href="#foot">Contatti</a></li>
                 </ul>
             </div>
 
@@ -313,7 +313,7 @@
 
 
     <!-- Start Post Footer -->
-    <footer class="post-footer">
+    <footer class="post-footer" id="foot">
         <div class="container">
             <div class="foot-left">
                 <div>&copy; ColtriCat <span class="copy-year"></span>. All rights reserved.</div>

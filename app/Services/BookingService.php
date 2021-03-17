@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Mail\BookingCreazioneEmail;
+use App\Mail\prenotazioneOra;
 use App\Models\Booking;
 use App\Models\BookingUser;
 use App\Models\Field;
@@ -38,10 +39,10 @@ class BookingService
         if (!$prenotazioneEsistente)
         {
             $res = $this->creaNuovaPrenotazione($giorno, $ora, $campo, $tipo);
-            Mail::to('coltrida@gmail.com')->queue(new BookingCreazioneEmail($giorno, $ora, $campo, $tipo));
+            Mail::to(Auth::user()->email)->send(new PrenotazioneOra($giorno, $ora, $campo, $tipo, Auth::user()->credito));
         } else {
             $res = $this->aggiornaPrenotazioneEsistente($prenotazioneEsistente);
-            Mail::to('coltrida@gmail.com')->queue(new BookingCreazioneEmail($giorno, $ora, $campo, $tipo));
+            Mail::to(Auth::user()->email)->send(new PrenotazioneOra($giorno, $ora, $campo, $tipo, Auth::user()->credito));
         }
         return $res;
     }

@@ -7,8 +7,9 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
-class BookingCreazioneEmail extends Mailable
+class PrenotazioneOra extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,21 +17,24 @@ class BookingCreazioneEmail extends Mailable
     public $ora;
     public $campo;
     public $tipo;
+    public $credito;
 
     /**
      * Create a new message instance.
-     * @var string $tipo
      * @var string $giorno
-     * @var string $campo
      * @var int $ora
+     * @var string $campo
+     * @var string $tipo
+     * @var float $credito
      * @return void
      */
-    public function __construct($giorno, $ora, $campo, $tipo)
+    public function __construct($giorno, $ora, $campo, $tipo, $credito)
     {
-        $this->campo = $campo;
         $this->giorno = Carbon::make($giorno)->format('d/m/Y');
-        $this->ora = $ora;
+        $this->ora = $campo == 'Campo1' || $campo == 'Campo2' ? $ora.':00' : $ora.':30' ;
+        $this->campo = $campo;
         $this->tipo = $tipo;
+        $this->credito = $credito;
     }
 
     /**
@@ -40,6 +44,6 @@ class BookingCreazioneEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.bookingCreazione');
+        return $this->markdown('mails.prenotazioneOra');
     }
 }

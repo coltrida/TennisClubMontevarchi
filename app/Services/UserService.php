@@ -4,8 +4,11 @@
 namespace App\Services;
 
 
+use App\Mail\RicaricaSocio;
+use App\Mail\StornaSocio;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use function dd;
 use function trim;
 use Illuminate\Support\Str;
@@ -18,6 +21,7 @@ class UserService
             $user = User::find($id_utente);
             $user->credito += (float)$request->importo;
             $user->save();
+            Mail::to($user->email)->send(new RicaricaSocio($user->credito, (float)$request->importo));
         }
     }
 
@@ -27,6 +31,7 @@ class UserService
             $user = User::find($id_utente);
             $user->credito -= (float)$request->importo;
             $user->save();
+            Mail::to($user->email)->send(new StornaSocio($user->credito, (float)$request->importo));
         }
     }
 
