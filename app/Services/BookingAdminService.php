@@ -9,7 +9,6 @@ use App\Models\Field;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use function activity;
-use function dd;
 
 class BookingAdminService
 {

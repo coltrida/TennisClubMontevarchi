@@ -44,7 +44,7 @@ class FrontController extends Controller
     public function inviaResetPassword(ResetPasswordRequest $request)
     {
         $user = User::where('email', $request->email)->first();
-        Mail::to($request->email)->send(new ResetPasswordEmail($user->id));
+        Mail::to($request->email)->queue(new ResetPasswordEmail($user->id));
         return redirect()->back()->withMessage('Richiesta effettuata! Apri la tua casella di posta e segui le istruzioni per re-impostare la tua password');
     }
 
