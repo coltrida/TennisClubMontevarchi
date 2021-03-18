@@ -23,9 +23,8 @@ class UserService
             $user = User::find($id_utente);
             $user->credito += (float)$request->importo;
             $user->save();
-            Mail::to($user->email)->send(new RicaricaSocio($user->credito, (float)$request->importo));
+            Mail::to($user->email)->queue(new RicaricaSocio($user->credito, (float)$request->importo));
             activity()->log("L'utente ".Auth::user()->name." ha ricaricato l'utente: ".$user->name." per un importo di euro: ".(float)$request->importo.". Credito attuale dell'utente: euro: ".$user->credito);
-
         }
     }
 
@@ -35,9 +34,8 @@ class UserService
             $user = User::find($id_utente);
             $user->credito -= (float)$request->importo;
             $user->save();
-            Mail::to($user->email)->send(new StornaSocio($user->credito, (float)$request->importo));
+            Mail::to($user->email)->queue(new StornaSocio($user->credito, (float)$request->importo));
             activity()->log("L'utente ".Auth::user()->name." ha stornato l'utente: ".$user->name." per un importo di euro: ".(float)$request->importo.". Credito attuale dell'utente: euro: ".$user->credito);
-
         }
     }
 

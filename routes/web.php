@@ -14,10 +14,11 @@ Route::get('/resetPassword', [FrontController::class, 'resetPassword'])->name('r
 Route::post('/resetPassword', [FrontController::class, 'inviaResetPassword'])->name('inviaResetPassword');
 Route::get('/reimpostaPassword/{id}', [FrontController::class, 'reimpostaPassword'])->name('reimpostaPassword');
 Route::post('/reimpostaPassword', [FrontController::class, 'setReimpostaPassword'])->name('setReimpostaPassword');
+Route::get('/ricaricaPrivilegi', [FrontController::class, 'ricaricaPrivilegi'])->name('ricaricaPrivilegi');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/iniziaCoda', function () {
-    Artisan::call('queue:work');
+    Artisan::call('queue:work --queue=high,default');
 });
 
 Route::group(

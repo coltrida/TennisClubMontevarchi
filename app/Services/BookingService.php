@@ -4,7 +4,6 @@
 namespace App\Services;
 
 
-use App\Mail\BookingCreazioneEmail;
 use App\Mail\prenotazioneOra;
 use App\Models\Booking;
 use App\Models\BookingUser;
@@ -43,7 +42,7 @@ class BookingService
         } else {
             $res = $this->aggiornaPrenotazioneEsistente($prenotazioneEsistente);
         }
-        Mail::to(Auth::user()->email)->send(new PrenotazioneOra($giorno, $ora, $campo, $tipo, Auth::user()->credito));
+        Mail::to(Auth::user()->email)->queue(new PrenotazioneOra($giorno, $ora, $campo, $tipo, Auth::user()->credito));
         activity()->log("L'utente ".Auth::user()->name." ha prenotato il ".$campo." per il giorno ".$giorno." alle ore ".$ora." (".$tipo.")");
         return $res;
     }

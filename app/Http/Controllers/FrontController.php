@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Mail;
 use function compact;
+use function config;
 use function dd;
 use function redirect;
 use function view;
@@ -58,5 +59,18 @@ class FrontController extends Controller
             return redirect()->back()->withMessage('Errore nella re-impostazione password');
         }
         return redirect()->back()->withMessage('Reimpostazione password effettuata - Vai al Login');
+    }
+
+    public function ricaricaPrivilegi()
+    {
+        $privilegiati = User::
+            where('tipo', config('enum.tipo.PRIVILEGI'))
+            ->orWhere('tipo', config('enum.tipo.ILLIMITATI'))
+            ->get();
+        foreach ($privilegiati as $privilegiato)
+        {
+            $privilegiato->ore_privilegi = 7;
+            $privilegiato->save();
+        }
     }
 }
