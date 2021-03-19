@@ -110,4 +110,9 @@ class AdminController extends Controller
         $logs = Activity::latest()->get();
         return view('admin.logging', compact('logs'));
     }
+
+    public function stampa()
+    {
+        
+    }
 }

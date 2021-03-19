@@ -8,6 +8,7 @@ use App\Mail\ResetPasswordEmail;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Mail;
+use function asset;
 use function compact;
 use function config;
 use function dd;
@@ -73,4 +74,5 @@ class FrontController extends Controller
             $privilegiato->save();
         }
     }
+
 }

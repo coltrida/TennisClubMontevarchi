@@ -20,9 +20,9 @@ class BookingService
     public function showPrenotazioni($giorno, $campo)
     {
         $booking = Booking::with('users:name')->where([
-                ['giorno', $giorno],
-                ['campo', $campo]
-            ])->get();
+            ['giorno', $giorno],
+            ['campo', $campo]
+        ])->get();
 
         return $booking->mapWithKeys(function ($item) {
             return [$item['orainizio'] => $item];
@@ -31,185 +31,147 @@ class BookingService
 
     public function createPrenotazione($giorno, $ora, $campo, $tipo)
     {
-        if(!$this->verficaCredito($tipo))
-        {
+        if (!$this->verficaCredito($tipo)) {
             return false;
         }
         $prenotazioneEsistente = $this->prentazioneEsistente($giorno, $ora, $campo);
-        if (!$prenotazioneEsistente)
-        {
+        if (!$prenotazioneEsistente) {
             $res = $this->creaNuovaPrenotazione($giorno, $ora, $campo, $tipo);
         } else {
             $res = $this->aggiornaPrenotazioneEsistente($prenotazioneEsistente);
         }
         Mail::to(Auth::user()->email)->queue(new PrenotazioneOra($giorno, $ora, $campo, $tipo, Auth::user()->credito));
-        activity()->log("L'utente ".Auth::user()->name." ha prenotato il ".$campo." per il giorno ".$giorno." alle ore ".$ora." (".$tipo.")");
+        activity()->log("L'utente " . Auth::user()->name . " ha prenotato il " . $campo . " per il giorno " . $giorno . " alle ore " . $ora . " (" . $tipo . ")");
         return $res;
+    }
+
+    private function isIllimitato($user, $operazione)
+    {
+        if ($operazione == '-') {
+            $user->ore_privilegi--;
+            if ($user->ore_privilegi < 0) {
+                $user->ore_privilegi = 0;
+            }
+            $user->save();
+            activity()->log("L'utente " . Auth::user()->name . " ha pagato la prenotazione con i privilegi. Privilegi Residui €" . $user->ore_privilegi);
+
+        } else {
+            $user->ore_privilegi++;
+            if ($user->ore_privilegi > 7) {
+                $user->ore_privilegi = 7;
+            }
+            $user->save();
+            activity()->log("L'utente " . Auth::user()->name . " ha ricevuto 1 privilegio. Privilegi Residui €" . $user->ore_privilegi);
+
+        }
+        return true;
+    }
+
+    private function pagamentoContanti($user, $importo)
+    {
+        if ($user->credito >= $importo) {
+            $user->credito -= $importo;
+            $user->save();
+            activity()->log("L'utente " . Auth::user()->name . " ha pagato, per la prenotazione, un importo di € " . $importo . ". Credito Residuo €" . $user->credito);
+            return true;
+        } else {
+            // ----------------- credito insufficiente --------
+            activity()->log("L'utente " . Auth::user()->name . " ha tentato di effettuare una prenotazione, per un importo di €" . $importo . "ma il suo credito è insufficiente. Credito Residui €" . $user->credito);
+            return false;
+        }
+    }
+
+    private function ridareContanti($user, $importo)
+    {
+        $user->credito += $importo;
+        $user->save();
+        activity()->log("L'utente " . Auth::user()->name . " ha ricevuto un importo di € " . $importo . ". Credito Residuo €" . $user->credito);
+        return true;
+    }
+
+    private function isPrivilegiato($user, $tipo, $operazione)
+    {
+        if ($operazione = '-') {
+            $user->ore_privilegi--;
+            if ($user->ore_privilegi < 0) // ------------ il privilegiato deve pagare con i soldi ------------------
+            {
+                $user->ore_privilegi = 0;
+                if ($tipo == 'Singolare') {
+                    // --------------------------- Privilegiato Singolare --------------------------
+                    return $this->pagamentoContanti($user, config('enum.costi.STANDARD_SINGOLO'));
+                } else {
+                    // -----------------------------Privilegiato Doppio -----------------------------
+                    return $this->pagamentoContanti($user, config('enum.costi.STANDARD_DOPPIO'));
+                }
+            } else {
+                // ---------------- il privilegiato paga con i privilegi -------------------------
+                $user->save();
+                activity()->log("L'utente " . Auth::user()->name . " ha pagato la prenotazione con i privilegi. Privilegi Residui €" . $user->ore_privilegi);
+                return true;
+            }
+        } else {
+            $user->ore_privilegi++;
+            $user->save();
+            activity()->log("L'utente " . Auth::user()->name . " ha ricevuto 1 privilegio. Privilegi Residui €" . $user->ore_privilegi);
+
+            return true;
+        }
     }
 
     private function verficaCredito($tipo)
     {
         $user = Auth::user();
-        if ($user->isIllimitati)
-        // ------------------ illimitato --------------------------------
+        if ($user->isIllimitati) // ------------------ illimitato --------------------------------
         {
-            $user->ore_privilegi--;
-            if ($user->ore_privilegi < 0 )
-            {
-                $user->ore_privilegi = 0;
-            }
-            $user->save();
-            return true;
+            $this->isIllimitato($user, '-');
         } else
             // ----------------------privilegiato -----------------------------
-            if ($user->isPrivilegi)
-            {
-                $user->ore_privilegi--;
-                if ($user->ore_privilegi < 0 )
-                // ------------ il privilegiato deve pagare con i soldi ------------------
-                {
-                    $user->ore_privilegi = 0;
-                    if ($tipo == 'Singolare'){
-                        // --------------------------- Privilegiato Singolare --------------------------
-                        if($user->credito >= config('enum.costi.STANDARD_SINGOLO'))
-                        {
-                            $user->credito -= config('enum.costi.STANDARD_SINGOLO');
-                            $user->save();
-                            return true;
-                        } else {
-                            // ----------------- credito insufficiente per il singolo --------
-                            return false;
-                        }
-                    } else {
-                        // -----------------------------Privilegiato Doppio -----------------------------
-                        if($user->credito >= config('enum.costi.STANDARD_DOPPIO'))
-                        {
-                            $user->credito -= config('enum.costi.STANDARD_DOPPIO');
-                            $user->save();
-                            return true;
-                        } else {
-                            // ----------------- credito insufficiente per il doppio --------
-                            return false;
-                        }
-                    }
-                } else {
-                    // ---------------- il privilegiato paga con i privilegi -------------------------
-                    $user->save();
-                    return true;
-                }
+            if ($user->isPrivilegi) {
+                $this->isPrivilegiato($user, $tipo, '-');
             } else
                 // ----------------------Non socio -----------------------------
-                if ($user->isNonsocio)
-                {
-                    if ($user->eta < 18 || $user->eta > 65)
-                        // ---------------------------- utente Non socio minorenne -----------------------------
+                if ($user->isNonsocio) {
+                    if ($user->eta < 18) // ---------------------------- utente Non socio minorenne -----------------------------
                     {
-                        if ($tipo == 'Singolare'){
+                        if ($tipo == 'Singolare') {
                             // --------------------------- Non socio minorenne Singolare --------------------------
-                            if($user->credito >= config('enum.costi.MINORENNI_NONSOCI'))
-                            {
-                                $user->credito -= config('enum.costi.MINORENNI_NONSOCI');
-                                $user->save();
-                                return true;
-                            } else {
-                                // ----------------- credito insufficiente per il singolo --------
-                                return false;
-                            }
+                            return $this->pagamentoContanti($user, config('enum.costi.MINORENNI_NONSOCI'));
                         } else {
                             // -----------------------------Non socio minorenne Doppio -----------------------------
-                            if($user->credito >= config('enum.costi.MINORENNI_DOPPIO'))
-                            {
-                                $user->credito -= config('enum.costi.MINORENNI_DOPPIO');
-                                $user->save();
-                                return true;
-                            } else {
-                                // ----------------- credito insufficiente per il doppio --------
-                                return false;
-                            }
+                            return $this->pagamentoContanti($user, config('enum.costi.MINORENNI_DOPPIO'));
                         }
-                    } else
-                    {
+                    } else {
                         // -------------------- utente Non socio standard ---------------------
-                        if ($tipo == 'Singolare'){
-                            // --------------------------- Non socio Singolare --------------------------
-                            if($user->credito >= config('enum.costi.NONSOCI_SINGOLO'))
-                            {
-                                $user->credito -= config('enum.costi.NONSOCI_SINGOLO');
-                                $user->save();
-                                return true;
-                            } else {
-                                // ----------------- credito insufficiente per il singolo --------
-                                return false;
-                            }
+                        if ($tipo == 'Singolare') {
+                            // --------------------------- Non socio standard Singolare --------------------------
+                            return $this->pagamentoContanti($user, config('enum.costi.NONSOCI_SINGOLO'));
                         } else {
-                            // -----------------------------Non socio Doppio -----------------------------
-                            if($user->credito >= config('enum.costi.NONSOCI_DOPPIO'))
-                            {
-                                $user->credito -= config('enum.costi.NONSOCI_DOPPIO');
-                                $user->save();
-                                return true;
-                            } else {
-                                // ----------------- credito insufficiente per il doppio --------
-                                return false;
-                            }
+                            // -----------------------------Non socio standard Doppio -----------------------------
+                            return $this->pagamentoContanti($user, config('enum.costi.NONSOCI_DOPPIO'));
                         }
                     }
                 } else {
-                   // ----------------------------- utente normale -----------------------------
-                    if ($user->eta < 18 || $user->eta > 65)
-                    // ---------------------------- utente normale minorenne -----------------------------
+                    // ----------------------------- utente socio normale -----------------------------
+                    if ($user->eta < 18) // ---------------------------- utente socio minorenne -----------------------------
                     {
-                        if ($tipo == 'Singolare'){
-                            // --------------------------- minorenne Singolare --------------------------
-                            if($user->credito >= config('enum.costi.MINORENNI_SINGOLO'))
-                            {
-                                $user->credito -= config('enum.costi.MINORENNI_SINGOLO');
-                                $user->save();
-                                return true;
-                            } else {
-                                // ----------------- credito insufficiente per il singolo --------
-                                return false;
-                            }
+                        if ($tipo == 'Singolare') {
+                            // --------------------------- minorenne socio Singolare --------------------------
+                            return $this->pagamentoContanti($user, config('enum.costi.MINORENNI_SINGOLO'));
                         } else {
-                            // -----------------------------minorenne Doppio -----------------------------
-                            if($user->credito >= config('enum.costi.MINORENNI_DOPPIO'))
-                            {
-                                $user->credito -= config('enum.costi.MINORENNI_DOPPIO');
-                                $user->save();
-                                return true;
-                            } else {
-                                // ----------------- credito insufficiente per il doppio --------
-                                return false;
-                            }
+                            // -----------------------------minorenne socio Doppio -----------------------------
+                            return $this->pagamentoContanti($user, config('enum.costi.MINORENNI_DOPPIO'));
                         }
-                    } else
-                        {
-                            // -------------------- utente normale standard ---------------------
-                            if ($tipo == 'Singolare'){
-                                // --------------------------- standard Singolare --------------------------
-                                if($user->credito >= config('enum.costi.STANDARD_SINGOLO'))
-                                {
-                                    $user->credito -= config('enum.costi.STANDARD_SINGOLO');
-                                    $user->save();
-                                    return true;
-                                } else {
-                                    // ----------------- credito insufficiente per il singolo --------
-                                    return false;
-                                }
-                            } else {
-                                // -----------------------------standard Doppio -----------------------------
-                                if($user->credito >= config('enum.costi.STANDARD_DOPPIO'))
-                                {
-                                    $user->credito -= config('enum.costi.STANDARD_DOPPIO');
-                                    $user->save();
-                                    return true;
-                                } else {
-                                    // ----------------- credito insufficiente per il doppio --------
-                                    return false;
-                                }
-                            }
+                    } else {
+                        // -------------------- utente socio normale standard ---------------------
+                        if ($tipo == 'Singolare') {
+                            // --------------------------- socio standard Singolare --------------------------
+                            return $this->pagamentoContanti($user, config('enum.costi.STANDARD_SINGOLO'));
+                        } else {
+                            // -----------------------------socio standard Doppio -----------------------------
+                            return $this->pagamentoContanti($user, config('enum.costi.STANDARD_DOPPIO'));
                         }
-            }
+                    }
+                }
     }
 
     private function creaNuovaPrenotazione($giorno, $ora, $campo, $tipo)
@@ -220,7 +182,7 @@ class BookingService
             'campo' => $campo,
             'tipo' => $tipo
         ]);
-        if ($res){
+        if ($res) {
             $prenotazione->users()->attach(Auth::id());
         }
         return $res;
@@ -253,11 +215,10 @@ class BookingService
 
     public function isAvailable($giorno, $campo)
     {
-        if(Auth::user()->isAdmin) {
+        if (Auth::user()->isAdmin) {
             return true;
         }
-        if(!Field::where('nome', $campo)->first()->disponibile)
-        {
+        if (!Field::where('nome', $campo)->first()->disponibile) {
             return false;
         }
         $giornosel = Carbon::make($giorno);
@@ -272,7 +233,7 @@ class BookingService
         return Booking::with('users:id')->whereHas('users', function ($query) {
             return $query->where('user_id', Auth::id());
         })->where([
-            ['giorno', '>' ,$oggi]
+            ['giorno', '>', $oggi]
         ])->get();
 
         //dd($res);
@@ -284,10 +245,8 @@ class BookingService
         $this->ridareCredito($booking->tipo);
         $res = BookingUser::where('booking_id', $id)->where('user_id', Auth::id());
         $res->first()->delete();
-        activity()->log("L'utente ".Auth::user()->name." ha cancellato la prenotazione con id: ".$booking->id." per il giorno ".$booking->giorno." alle ore ".$booking->orainizio." (".$booking->tipo.")");
-
-        if ($booking->users->count() == 0)
-        {
+        activity()->log("L'utente " . Auth::user()->name . " ha cancellato la prenotazione con id: " . $booking->id . " per il giorno " . $booking->giorno . " alle ore " . $booking->orainizio . " (" . $booking->tipo . ")");
+        if ($res->count() == 0) {
             $booking->delete();
         }
         return $res;
@@ -296,84 +255,58 @@ class BookingService
     private function ridareCredito($tipo)
     {
         $user = Auth::user();
-        if ($user->isIllimitati)
-            // ------------------ illimitato --------------------------------
+        if ($user->isIllimitati) // ------------------ illimitato --------------------------------
         {
-            $user->ore_privilegi++;
-            if ($user->ore_privilegi > 7 )
-            {
-                $user->ore_privilegi = 7;
-            }
-            $user->save();
-            return true;
+            $this->isIllimitato($user, '+');
         } else
             // ----------------------privilegiato -----------------------------
             if ($user->isPrivilegi)
             {
-                $user->ore_privilegi++;
-                if ($user->ore_privilegi > 7 )
-                    // ------------ il privilegiato deve pagare con i soldi ------------------
+                $this->isPrivilegiato($user, $tipo, '+');
+            } else
+                // ----------------------Non socio -----------------------------
+                if ($user->isNonsocio)
                 {
-                    $user->ore_privilegi = 7;
-                    if ($tipo == 'Singolare'){
-                        // --------------------------- Privilegiato Singolare --------------------------
-
-                            $user->credito += config('enum.costi.STANDARD_SINGOLO');
-                            $user->save();
-                            return true;
-
+                    if ($user->eta < 18) // ---------------------------- utente normale minorenne -----------------------------
+                    {
+                        if ($tipo == 'Singolare') {
+                            // --------------------------- minorenne Singolare --------------------------
+                            return $this->ridareContanti($user, config('enum.costi.MINORENNI_NONSOCI'));
+                        } else {
+                            // -----------------------------minorenne Doppio -----------------------------
+                            return $this->ridareContanti($user, config('enum.costi.MINORENNI_DOPPIO'));
+                        }
                     } else {
-                        // -----------------------------Privilegiato Doppio -----------------------------
-
-                            $user->credito += config('enum.costi.STANDARD_DOPPIO');
-                            $user->save();
-                            return true;
-
+                        // -------------------- utente normale standard ---------------------
+                        if ($tipo == 'Singolare') {
+                            // --------------------------- standard Singolare --------------------------
+                            return $this->ridareContanti($user, config('enum.costi.NONSOCI_SINGOLO'));
+                        } else {
+                            // -----------------------------standard Doppio -----------------------------
+                            return $this->ridareContanti($user, config('enum.costi.NONSOCI_DOPPIO'));
+                        }
                     }
                 } else {
-                    // ---------------- il privilegiato paga con i privilegi -------------------------
-                    $user->save();
-                    return true;
-                }
-            } else {
-                // ----------------------------- utente normale -----------------------------
-                if ($user->eta < 18 || $user->eta > 65)
-                    // ---------------------------- utente normale minorenne -----------------------------
-                {
-                    if ($tipo == 'Singolare'){
-                        // --------------------------- minorenne Singolare --------------------------
-
-                            $user->credito += config('enum.costi.MINORENNI_SINGOLO');
-                            $user->save();
-                            return true;
-
+                    // ----------------------------- utente normale -----------------------------
+                    if ($user->eta < 18) // ---------------------------- utente normale minorenne -----------------------------
+                    {
+                        if ($tipo == 'Singolare') {
+                            // --------------------------- minorenne Singolare --------------------------
+                            return $this->ridareContanti($user, config('enum.costi.MINORENNI_SINGOLO'));
+                        } else {
+                            // -----------------------------minorenne Doppio -----------------------------
+                            return $this->ridareContanti($user, config('enum.costi.MINORENNI_DOPPIO'));
+                        }
                     } else {
-                        // -----------------------------minorenne Doppio -----------------------------
-
-                            $user->credito += config('enum.costi.MINORENNI_DOPPIO');
-                            $user->save();
-                            return true;
-
-                    }
-                } else
-                {
-                    // -------------------- utente normale standard ---------------------
-                    if ($tipo == 'Singolare'){
-                        // --------------------------- standard Singolare --------------------------
-
-                            $user->credito += config('enum.costi.STANDARD_SINGOLO');
-                            $user->save();
-                            return true;
-
-                    } else {
-                        // -----------------------------standard Doppio -----------------------------
-
-                            $user->credito += config('enum.costi.STANDARD_DOPPIO');
-                            $user->save();
-                            return true;
-
+                        // -------------------- utente normale standard ---------------------
+                        if ($tipo == 'Singolare') {
+                            // --------------------------- standard Singolare --------------------------
+                            return $this->ridareContanti($user, config('enum.costi.STANDARD_SINGOLO'));
+                        } else {
+                            // -----------------------------standard Doppio -----------------------------
+                            return $this->ridareContanti($user, config('enum.costi.STANDARD_DOPPIO'));
+                        }
                     }
                 }
-            }
     }
 }

@@ -3,8 +3,6 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\FrontController;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontController::class, 'index'])->name('index');
 Route::get('/regolamento', [FrontController::class, 'regolamento'])->name('regolamento');
@@ -51,4 +49,5 @@ Route::group(
         Route::get('/inserisciSocio', [AdminController::class, 'inserisciSocio'])->name('inserisciSocio');
         Route::post('/inserisciSocio', [AdminController::class, 'setInserisciSocio'])->name('setInserisciSocio');
         Route::get('/log', [AdminController::class, 'logging'])->name('logging');
+        Route::get('/stampa', [AdminController::class, 'stampa'])->name('stampa');
     });

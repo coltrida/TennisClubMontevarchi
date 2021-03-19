@@ -2212,12 +2212,19 @@ blockquote small::before {
 }
 
 
-
 .close-modal{
     top: 5px!important;
     right: 5px!important;
 }
 
+.noinvio {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+    background-color: darkred;
+    opacity: .5;
+}
 
 /* --------------------------------------------------
  Custom Author Styles

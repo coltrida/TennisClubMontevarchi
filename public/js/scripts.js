@@ -868,7 +868,7 @@ $(document).ready(function() {
 	    scrollPerPage: true,
 	    autoHeight : true,
 	    lazyLoad : true,
-	    autoPlay: 4000,
+	    autoPlay: 20000,
 	    transitionStyle : "fade" //"fade" "backSlide" "goDown" "scaleUp" - Works only with one item on screen
 	  });
 

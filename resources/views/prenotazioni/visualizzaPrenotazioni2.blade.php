@@ -34,13 +34,21 @@
                         @for($j = 0; $j < count(config('enum.campi')); $j++)
                             <div class="col">
                                 <a href="{{route('prenotazioni2', ['giorno' => $giorno, 'campo' => config('enum.campi')[$j]])}}"
-                                                class="btn shadow {{$campo == config('enum.campi')[$j] ? 'btn-primary' : 'btn-secondary'}} my-2">{{config('enum.campi')[$j]}}</a>
+                                                class="btn shadow {{$campo == config('enum.campi')[$j] ? 'btn-primary' : 'btn-secondary'}} my-2">
+                                    <div>{{config('enum.campi')[$j]}}</div>
+                                    <div>{{config('enum.terreni')[$j]}}</div>
+                                </a>
                             </div>
                         @endfor
 
                     </div>
                     <div class="row row-cols-2 row-cols-md-6 gx-1" style="display: flex; justify-content: space-around; margin: 5px 0; align-items: center" >
                         @include('partials.infoCreditoPrivilegi')
+                        @if(Auth::user()->isAdmin)
+                            <a href="{{route('stampa')}}"
+                               class="btn shadow btn-success">stampa
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

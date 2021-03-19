@@ -70,27 +70,34 @@
         <form class="search-hero" action="{{ route('register') }}" method="post">
             @csrf
             <label class="input">
-                <input type="text" name="nome" class="form-control" placeholder="Nome">
+                <input type="text" name="nome" required class="form-control" placeholder="Nome">
             </label>
             <label class="input">
-                <input type="text" name="cognome" class="form-control" placeholder="Cognome">
+                <input type="text" name="cognome" required class="form-control" placeholder="Cognome">
             </label>
             <label class="input">
-                <input type="text" name="username" class="form-control" placeholder="username">
+                <input type="text" name="username" required class="form-control" placeholder="username">
             </label>
             <label class="input">
-                <input type="text" name="anno" class="form-control" placeholder="Anno di nascita - yyyy">
+                <input type="text" name="anno" required class="form-control" placeholder="Anno di nascita - yyyy">
             </label>
             <label class="input">
-                <input type="email" name="email" class="form-control" placeholder="e-mail">
+                <input type="email" name="email" required class="form-control" placeholder="e-mail">
             </label>
             <label class="input">
-                <input type="password" name="password" class="form-control" placeholder="password">
+                <input type="password" name="password" required class="form-control" placeholder="password">
             </label>
             <label class="input">
-                <input type="password" name="password_confirmed" class="form-control" placeholder="conferma password">
+                <input type="password" name="password_confirmed" required class="form-control" placeholder="conferma password">
             </label>
-            <button class="btn btn-success" type="submit">Iscrizione</button>
+            <div style="display: flex; justify-content: space-between; align-items: center">
+                <div>
+                    <button class="btn btn-success noinvio" id="inviaFormBtn" type="submit">Iscrizione</button>
+                </div>
+                <div>
+                    <input style="margin-right: 10px" type="checkbox" name="privacy" id="privacyCkb">Ho letto l'<a target="_blank" href="{{asset('informativa/doc.pdf')}}">informativa Privacy</a>
+                </div>
+            </div>
         </form>
 
     </div>
@@ -316,8 +323,9 @@
     <!-- Start Post Footer -->
     <footer class="post-footer" id="foot">
         <div class="container">
-            <div class="foot-left">
+            <div style="display: flex; justify-content: space-between; align-items: center">
                 <div>&copy; ColtriCat <span class="copy-year"></span>. All rights reserved.</div>
+                <div><a target="_blank" href="{{asset('informativa/doc.pdf')}}">Informativa Privacy</a></div>
             </div>
 
         </div>
@@ -383,5 +391,16 @@
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 
 @show
+<script>
+    $('document').ready(function () {
+        $("#privacyCkb").change(function() {
+            if(this.checked) {
+                $("#inviaFormBtn").removeClass('noinvio');
+            }else{
+                $("#inviaFormBtn").addClass('noinvio');
+            }
+        });
+    });
+</script>
 </body>
 </html>
