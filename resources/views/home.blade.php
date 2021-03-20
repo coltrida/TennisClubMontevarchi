@@ -3,6 +3,23 @@
 @section('container')
 
     @guest
+        @error('username')
+        <div class="messaggio" id="messaggioErroreLogin" style="
+                  position: fixed;
+                  z-index: 1;
+                  top: 5vw;
+                  color: white;
+                  left: 20vw;
+                  text-align: center;
+                  background-color: black;
+                  width: 50%;
+                  border: 3px solid green;
+                  padding: 10px;">
+            <div>
+                <span >{{ $message }}</span>
+            </div>
+        </div>
+        @enderror
     <!-- Start Feature Slider -->
     <div class="rev_slider_wrapper">
         <div id="slider1" class="rev_slider rev-slider-standard"  data-version="5.0">
@@ -144,10 +161,7 @@
         <section class="main-content">
             <div class="container body-content">
                 <h1>Prenotazioni</h1>
-                {{--<div id="datepicker"></div>
-                <input type="text" class="form-control" value="02-16-2012">--}}
                 <div style="display: flex;">
-
                         <div style="display: flex">
                             <div><input class="form-control"
                                         style="border: 1px black solid"

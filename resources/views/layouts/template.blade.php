@@ -165,7 +165,7 @@
                                         <div class="form-group">
                                             <label class="sr-only" >Username</label>
                                             <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="username">
-                                            @error('email')
+                                            @error('username')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -393,6 +393,7 @@
 @show
 <script>
     $('document').ready(function () {
+        $('#messaggioErroreLogin').fadeOut(7000);
         $("#privacyCkb").change(function() {
             if(this.checked) {
                 $("#inviaFormBtn").removeClass('noinvio');
