@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +17,7 @@
 
     <!-- jQuery Modal -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
 
     <!-- Menu Stylesheets -->
     <link rel="stylesheet" type="text/css" href="{{asset('css/menuzord.css')}}">
@@ -49,8 +48,10 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/styles.css')}}">
     <!-- Place RTL Style Sheet here -->
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css"  />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+          integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css"/>
 
     <!--[if lt IE 9]>
     <script src="./library/bs/js/html5shiv.min.js"></script>
@@ -65,7 +66,8 @@
     <!-- Close Button -->
     <a class="overlay-btn btn-closer" href="#"></a>
     <!-- Content Container -->
-    <div class="container" data-anijs="if: scroll, on:window, do: fadeInDown animated, before: scrollReveal, after: $fireOnce removeAnim ">
+    <div class="container"
+         data-anijs="if: scroll, on:window, do: fadeInDown animated, before: scrollReveal, after: $fireOnce removeAnim ">
         <h2>Registrazione</h2>
         <form class="search-hero" action="{{ route('register') }}" method="post">
             @csrf
@@ -88,14 +90,16 @@
                 <input type="password" name="password" required class="form-control" placeholder="password">
             </label>
             <label class="input">
-                <input type="password" name="password_confirmed" required class="form-control" placeholder="conferma password">
+                <input type="password" name="password_confirmed" required class="form-control"
+                       placeholder="conferma password">
             </label>
             <div style="display: flex; justify-content: space-between; align-items: center">
                 <div>
                     <button class="btn btn-success noinvio" id="inviaFormBtn" type="submit">Iscrizione</button>
                 </div>
                 <div>
-                    <input style="margin-right: 10px" type="checkbox" name="privacy" id="privacyCkb">Ho letto l'<a target="_blank" href="{{asset('informativa/doc.pdf')}}">informativa Privacy</a>
+                    <input style="margin-right: 10px" type="checkbox" name="privacy" id="privacyCkb">Ho letto l'<a
+                        target="_blank" href="{{asset('informativa/doc.pdf')}}">informativa Privacy</a>
                 </div>
             </div>
         </form>
@@ -121,15 +125,18 @@
 
             <div class="head-right">
                 @guest
-                    <strong>Next Game:</strong> <div id="clock"></div>
+                    <strong>Next Game:</strong>
+                    <div id="clock"></div>
                 @else
+                    <span class="badge" style="background-color: {{Auth::user()->isCertificatoScaduto ? 'red' : 'blue'}}; font-size: 17px">
+                        <strong>{{Auth::user()->isCertificatoScaduto ? 'Certificato Scaduto' : 'Scad. Cert.:'}} {{Auth::user()->certificato}}</strong>
+                    </span>
                     @include('partials.infoCreditoPrivilegi')
                 @endguest
             </div>
         </div>
     </nav>
     <!-- End Pre Header -->
-
 
 
     <!-- Start Main Header -->
@@ -140,7 +147,7 @@
                 <div class="head-left">
                     <a href="{{route('index')}}" class="menuzord-brand">
                         <!-- Sport <div class="tag-line">Sporting Club Theme</div> -->
-                        <img class="logo-img" src="{{asset('img/logo.png')}}" alt="Logo" />
+                        <img class="logo-img" src="{{asset('img/logo.png')}}" alt="Logo"/>
                     </a>
                 </div>
 
@@ -154,46 +161,44 @@
                         </ul>
                     </li>
                     @guest
-                    <li><a href="#">Login</a>
-                        <div class="megamenu">
-                            <!-- Start Row -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h4>Login</h4>
-                                    <form method="POST" action="{{ route('login') }}">
-                                        @csrf
-                                        <div class="form-group">
-                                            <label class="sr-only" >Username</label>
-                                            <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="username">
-                                            @error('username')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="sr-only" >Password</label>
-                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
-                                            @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                 </span>
-                                            @enderror
-                                        </div>
-                                        <button type="submit" class="btn btn-default">Login</button>
-                                    </form>
-                                    <a style="margin: auto" href="{{route('resetPassword')}}">Password Dimenticata</a>
-                                </div>
-                            </div><!--/.row -->
-                        </div>
-                    </li>
+                        <li><a href="#">Login</a>
+                            <div class="megamenu">
+                                <!-- Start Row -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Login</h4>
+                                        <form method="POST" action="{{ route('login') }}">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label class="sr-only">Username</label>
+                                                <input id="username" type="text"
+                                                       class="form-control @error('username') is-invalid @enderror"
+                                                       name="username" value="{{ old('username') }}" required
+                                                       autocomplete="username" autofocus placeholder="username">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="sr-only">Password</label>
+                                                <input id="password" type="password"
+                                                       class="form-control @error('password') is-invalid @enderror"
+                                                       name="password" required autocomplete="current-password"
+                                                       placeholder="Password">
+                                            </div>
+                                            <button type="submit" class="btn btn-default">Login</button>
+                                        </form>
+                                        <a style="margin: auto" href="{{route('resetPassword')}}">Password
+                                            Dimenticata</a>
+                                    </div>
+                                </div><!--/.row -->
+                            </div>
+                        </li>
 
-                    <li class="overlay-tigger">
-                        <a class="overlay-btn btn-open" href="#" title="Registrazione"><em class="fa fa-user"></em></a>
-                    </li>
+                        <li class="overlay-tigger">
+                            <a class="overlay-btn btn-open" href="#" title="Registrazione"><em class="fa fa-user"></em></a>
+                        </li>
                     @else
                         <li>
-                            <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
 
@@ -205,6 +210,7 @@
                                     <li><a href="{{route('ricaricaSocio')}}">Ricarica Socio</a></li>
                                     <li><a href="{{route('stornaSocio')}}">Storna Socio</a></li>
                                     <li><a href="{{route('inserisciSocio')}}">Inserisci Socio</a></li>
+                                    <li><a href="{{route('certificatiMedici')}}">Certificati Medici</a></li>
                                     <li><a href="{{route('logging')}}">Log</a></li>
                                 @else
                                     <li><a href="{{route('listaEliminabili')}}">Elimina ora</a></li>
@@ -217,7 +223,8 @@
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
-                                    </form></li>
+                                    </form>
+                                </li>
                             </ul>
 
                         </li>
@@ -260,7 +267,6 @@
 @yield('container')
 
 
-
 <hr class="rule-fat"/>
 
 <!--Start Footer -->
@@ -288,7 +294,8 @@
                         <ul class="list-paired">
                             <li><em class="fa fa-clock-o scale-80 feat-color"></em> Lunedì <span>9am - 10pm</span></li>
                             <li><em class="fa fa-clock-o scale-80 feat-color"></em> Martedì <span>9am - 9pm</span></li>
-                            <li><em class="fa fa-clock-o scale-80 feat-color"></em> Mercoledì <span>7am - 9pm</span></li>
+                            <li><em class="fa fa-clock-o scale-80 feat-color"></em> Mercoledì <span>7am - 9pm</span>
+                            </li>
                             <li><em class="fa fa-clock-o scale-80 feat-color"></em> Giovedì <span>9am - 1pm</span></li>
                         </ul>
                     </div>
@@ -298,7 +305,8 @@
                     <div class="widget widget-paired-list">
                         <h3>&nbsp;</h3>
                         <ul class="list-paired">
-                            <li><em class="fa fa-clock-o scale-80 feat-color"></em> Vernerdì <span>9am - 10pm</span></li>
+                            <li><em class="fa fa-clock-o scale-80 feat-color"></em> Vernerdì <span>9am - 10pm</span>
+                            </li>
                             <li><em class="fa fa-clock-o scale-80 feat-color"></em> Sabato <span>9am - 9pm</span></li>
                             <li><em class="fa fa-clock-o scale-80 feat-color"></em> Domenica <span>7am - 9pm</span></li>
                         </ul>
@@ -307,17 +315,17 @@
 
                 <div class="col-md-3">
                     <div class="widget widget-brand-address">
-                        <h3><img class="logo-img" src="{{asset('img/logo.png')}}" alt="Logo" /></h3>
+                        <h3><img class="logo-img" src="{{asset('img/logo.png')}}" alt="Logo"/></h3>
                         <ul class="list-styled list-bordered">
-                            <li><strong>Indirizzo:</strong><br/>Via Maestri del Lavoro, 3 - 52025 Montevarchi AR </li>
-                            <li><a target="_blank" href="https://goo.gl/maps/CsLpwzcf2A9N1aWX9">Vedi sulla mappa</a></li>
+                            <li><strong>Indirizzo:</strong><br/>Via Maestri del Lavoro, 3 - 52025 Montevarchi AR</li>
+                            <li><a target="_blank" href="https://goo.gl/maps/CsLpwzcf2A9N1aWX9">Vedi sulla mappa</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div><!--/.row -->
         </div>
     </footer>
-
 
 
     <!-- Start Post Footer -->
@@ -334,70 +342,70 @@
 
 
 @section('footer')
-<!-- JavaScript
+    <!-- JavaScript
    ================================================== -->
-<script src="{{asset('js/jquery.min.js')}}"></script>
-<script>window.jQuery || document.write('<script src="{{asset('js/jquery.min.js')}}"><\/script>')</script>
-<script src="{{asset('js/bootstrap.min.js')}}"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="{{asset('js/ie10-viewport-bug-workaround.js')}}"></script>
+    <script src="{{asset('js/jquery.min.js')}}"></script>
+    <script>window.jQuery || document.write('<script src="{{asset('js/jquery.min.js')}}"><\/script>')</script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{{asset('js/ie10-viewport-bug-workaround.js')}}"></script>
 
-<script type="text/javascript" src="{{asset('js/isotope.pkgd.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/imagesloaded.pkgd.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/owl.carousel.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/cleantabs.jquery.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/jquery.fancybox.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/jquery.scrollUp.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/valign.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/anijs-min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/anijs-helper-scrollreveal.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/anijs-helper-dom.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/menuzord.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/jquery.stickit.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/scrollIt.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/jquery.countdown.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/tooltipster.bundle.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/footer-reveal.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/headhesive.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/jquery.stellar.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/jquery.countTo.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/typed.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/jquery.waypoints.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/slidebars.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/tendina.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/jquery.sidr.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/pace.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/list.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/jquery.fitvids.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/isotope.pkgd.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/imagesloaded.pkgd.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/owl.carousel.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/cleantabs.jquery.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery.fancybox.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery.scrollUp.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/valign.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/anijs-min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/anijs-helper-scrollreveal.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/anijs-helper-dom.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/menuzord.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery.stickit.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/scrollIt.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery.countdown.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/tooltipster.bundle.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/footer-reveal.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/headhesive.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery.stellar.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery.countTo.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/typed.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery.waypoints.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/slidebars.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/tendina.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery.sidr.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/pace.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/list.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery.fitvids.js')}}"></script>
 
-<!-- Forms JS Files -->
-<script type="text/javascript" src="{{asset('js/jquery-ui.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/jquery.form.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/jquery.validate.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/jquery.maskedinput.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/jquery.modal.js')}}"></script>
+    <!-- Forms JS Files -->
+    <script type="text/javascript" src="{{asset('js/jquery-ui.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery.form.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery.validate.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery.maskedinput.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery.modal.js')}}"></script>
 
-<!-- RS5.0 Core JS Files -->
-<script type="text/javascript" src="{{asset('js/jquery.themepunch.tools.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/jquery.themepunch.revolution.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/revolution.extension.slideanims.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/revolution.extension.layeranimation.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/revolution.extension.navigation.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/revolution.extension.kenburn.min.js')}}"></script>
+    <!-- RS5.0 Core JS Files -->
+    <script type="text/javascript" src="{{asset('js/jquery.themepunch.tools.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery.themepunch.revolution.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/revolution.extension.slideanims.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/revolution.extension.layeranimation.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/revolution.extension.navigation.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/revolution.extension.kenburn.min.js')}}"></script>
 
-<!-- Scripts Go -->
-<script src="{{asset('js/validate-contact.js')}}"></script>
-<script src="{{asset('js/scripts.js')}}"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <!-- Scripts Go -->
+    <script src="{{asset('js/validate-contact.js')}}"></script>
+    <script src="{{asset('js/scripts.js')}}"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 
 @show
 <script>
     $('document').ready(function () {
         $('#messaggioErroreLogin').fadeOut(7000);
-        $("#privacyCkb").change(function() {
-            if(this.checked) {
+        $("#privacyCkb").change(function () {
+            if (this.checked) {
                 $("#inviaFormBtn").removeClass('noinvio');
-            }else{
+            } else {
                 $("#inviaFormBtn").addClass('noinvio');
             }
         });

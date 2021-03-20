@@ -138,7 +138,7 @@ class BookingService
                             return $this->pagamentoContanti($user, config('enum.costi.MINORENNI_NONSOCI'));
                         } else {
                             // -----------------------------Non socio minorenne Doppio -----------------------------
-                            return $this->pagamentoContanti($user, config('enum.costi.MINORENNI_DOPPIO'));
+                            return $this->pagamentoContanti($user, config('enum.costi.MINORENNI_NONSOCI'));
                         }
                     } else {
                         // -------------------- utente Non socio standard ---------------------
@@ -221,6 +221,9 @@ class BookingService
         if (!Field::where('nome', $campo)->first()->disponibile) {
             return false;
         }
+        if (Auth::user()->isCertificatoScaduto) {
+            return false;
+        }
         $giornosel = Carbon::make($giorno);
         $ieri = Carbon::now()->subDay();
         $limite = Carbon::now()->addDays(7);
@@ -274,7 +277,7 @@ class BookingService
                             return $this->ridareContanti($user, config('enum.costi.MINORENNI_NONSOCI'));
                         } else {
                             // -----------------------------minorenne Doppio -----------------------------
-                            return $this->ridareContanti($user, config('enum.costi.MINORENNI_DOPPIO'));
+                            return $this->ridareContanti($user, config('enum.costi.MINORENNI_NONSOCI'));
                         }
                     } else {
                         // -------------------- utente normale standard ---------------------

@@ -49,5 +49,7 @@ Route::group(
         Route::get('/inserisciSocio', [AdminController::class, 'inserisciSocio'])->name('inserisciSocio');
         Route::post('/inserisciSocio', [AdminController::class, 'setInserisciSocio'])->name('setInserisciSocio');
         Route::get('/log', [AdminController::class, 'logging'])->name('logging');
+        Route::get('/certificati', [AdminController::class, 'certificati'])->name('certificatiMedici');
+        Route::post('/certificati', [AdminController::class, 'setCertificato'])->name('setCertificato');
         Route::get('/stampa', [AdminController::class, 'stampa'])->name('stampa');
     });

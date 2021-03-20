@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BookingAdminRequest;
+use App\Http\Requests\CertificatoRequest;
 use App\Http\Requests\CreditoSocioRequest;
 use App\Http\Requests\InsertSocioRequest;
 use App\Models\Field;
@@ -111,8 +112,18 @@ class AdminController extends Controller
         return view('admin.logging', compact('logs'));
     }
 
-    public function stampa()
+    public function certificati()
     {
-        
+        $soci = User::orderBy('name')->get();
+        return view('admin.certificati', compact('soci'));
+    }
+
+    public function setCertificato(CertificatoRequest $request, UserService $userService)
+    {
+        if(!$userService->aggiornaCertificato($request))
+        {
+            return redirect()->back()->withMessage('Errore aggiornamento certificato');
+        }
+        return redirect()->back()->withMessage('Certificato aggiornato correttamente');
     }
 }

@@ -50,6 +50,7 @@ class UserService
             'name' => $nominativo,
             'anno' => $request->input('anno'),
             'tipo' => $request->input('tipo'),
+            'scadenzaCertificato' => $request->input('certificato'),
             'ore_privilegi' => $request->input('privilegi')
         ]);
     }
@@ -59,5 +60,12 @@ class UserService
         $user = User::find($request->id);
         $user->password = Hash::make($request->password);
         return $user->save();
+    }
+
+    public function aggiornaCertificato($request)
+    {
+        return User::find($request->input('id'))->update([
+            'scadenzaCertificato' => $request->certificato
+        ]);
     }
 }

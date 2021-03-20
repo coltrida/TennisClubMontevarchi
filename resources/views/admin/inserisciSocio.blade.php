@@ -30,6 +30,10 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label >Scadenza Certificato</label>
+                    <input style="border: gray 1px solid" id="certificato" type="date" class="form-control @error('anno') is-invalid @enderror" name="certificato" autocomplete="certificato" placeholder="certificato">
+                </div>
+                <div class="form-group">
                     <label for="privilegi">Ore Privilegi</label>
                     <select name="privilegi" id="privilegi" style="border: gray 1px solid" class="form-control @error('privilegi') is-invalid @enderror">
                         @for($i = 0; $i < 8; $i++)

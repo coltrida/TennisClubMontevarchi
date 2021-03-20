@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('tipo');
             $table->unsignedTinyInteger('ore_privilegi')->default(0);
             $table->float('credito')->default(0);
+            $table->date('scadenzaCertificato')->nullable();
             $table->string('email')->unique()->index()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();

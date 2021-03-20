@@ -99,6 +99,24 @@ class User extends Authenticatable
         return Carbon::now()->year - $this->anno;
     }
 
+
+    public function getCertificatoAttribute()
+    {
+        return $this->scadenzaCertificato ? Carbon::make($this->scadenzaCertificato)->format('d/m/Y') : '';
+    }
+
+    /**
+     * Ritorna true se il certificato è scaduto.
+     *
+     * @return  boolean
+     */
+    public function getIsCertificatoScadutoAttribute()
+    {
+        $oggi = Carbon::now();
+        $dataCertificato = Carbon::make($this->scadenzaCertificato);
+        return $dataCertificato < $oggi;
+    }
+
     public function bookings()
     {
         return $this->belongsToMany(Booking::class);
