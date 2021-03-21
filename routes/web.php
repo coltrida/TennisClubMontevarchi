@@ -13,6 +13,8 @@ Route::post('/resetPassword', [FrontController::class, 'inviaResetPassword'])->n
 Route::get('/reimpostaPassword/{id}', [FrontController::class, 'reimpostaPassword'])->name('reimpostaPassword');
 Route::post('/reimpostaPassword', [FrontController::class, 'setReimpostaPassword'])->name('setReimpostaPassword');
 Route::get('/ricaricaPrivilegi', [FrontController::class, 'ricaricaPrivilegi'])->name('ricaricaPrivilegi');
+Route::get('/upload', [AdminController::class, 'upload'])->name('upload');
+Route::get('/duplicates', [AdminController::class, 'duplicates'])->name('duplicates');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/iniziaCoda', function () {
@@ -52,4 +54,5 @@ Route::group(
         Route::get('/certificati', [AdminController::class, 'certificati'])->name('certificatiMedici');
         Route::post('/certificati', [AdminController::class, 'setCertificato'])->name('setCertificato');
         Route::get('/stampa', [AdminController::class, 'stampa'])->name('stampa');
+
     });

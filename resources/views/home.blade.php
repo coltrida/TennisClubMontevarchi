@@ -20,6 +20,40 @@
             </div>
         </div>
         @enderror
+        @error('email')
+        <div class="messaggio" id="messaggioErroreEmail" style="
+                  position: fixed;
+                  z-index: 1;
+                  top: 5vw;
+                  color: white;
+                  left: 20vw;
+                  text-align: center;
+                  background-color: black;
+                  width: 50%;
+                  border: 3px solid green;
+                  padding: 10px;">
+            <div>
+                <span >{{ $message }}</span>
+            </div>
+        </div>
+        @enderror
+        @error('username')
+        <div class="messaggio" id="messaggioErroreUsername" style="
+                  position: fixed;
+                  z-index: 1;
+                  top: 5vw;
+                  color: white;
+                  left: 20vw;
+                  text-align: center;
+                  background-color: black;
+                  width: 50%;
+                  border: 3px solid green;
+                  padding: 10px;">
+            <div>
+                <span >{{ $message }}</span>
+            </div>
+        </div>
+        @enderror
     <!-- Start Feature Slider -->
     <div class="rev_slider_wrapper">
         <div id="slider1" class="rev_slider rev-slider-standard"  data-version="5.0">

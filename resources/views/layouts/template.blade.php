@@ -90,7 +90,7 @@
                 <input type="password" name="password" required class="form-control" placeholder="password">
             </label>
             <label class="input">
-                <input type="password" name="password_confirmed" required class="form-control"
+                <input type="password" name="password_confirmation" required class="form-control"
                        placeholder="conferma password">
             </label>
             <div style="display: flex; justify-content: space-between; align-items: center">
@@ -402,6 +402,8 @@
 <script>
     $('document').ready(function () {
         $('#messaggioErroreLogin').fadeOut(7000);
+        $('#messaggioErroreEmail').fadeOut(7000);
+        $('#messaggioErroreUsername').fadeOut(7000);
         $("#privacyCkb").change(function () {
             if (this.checked) {
                 $("#inviaFormBtn").removeClass('noinvio');

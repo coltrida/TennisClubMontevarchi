@@ -52,13 +52,14 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
 {
-    return Validator::make($data, [] /*[
-        'name' => ['required', 'string', 'max:255'],
-        'cognome' => ['required', 'string', 'max:255'],
-        'anno' => ['required', 'int', 'max:4'],
+    //dd($data);
+    return Validator::make($data, [
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        'password' => ['required', 'string', 'min:8', 'confirmed'],
-    ]*/);
+        'username' => ['unique:users'],
+    ], $messages = [
+        'email.unique' => 'Errore! La mail inserita è già stata utilizzata.',
+        'username.unique' => 'Errore! username inserita è già stata utilizzata.',
+    ]);
 }
 
     /**
