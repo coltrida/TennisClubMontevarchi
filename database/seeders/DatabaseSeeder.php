@@ -7,7 +7,9 @@ use App\Models\User;
 use DB;
 use Hash;
 use Illuminate\Database\Seeder;
+use function config;
 use function file_get_contents;
+use function now;
 use function public_path;
 
 class DatabaseSeeder extends Seeder
@@ -20,19 +22,35 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::insert(
-            [
+            [[
                 'name' => 'Tc Montevarchi',
-                'username' => 'admin',
+                'username' => 'cacao',
                 'email' => 'coltrida@gmail.com',
                 'anno' => 1975,
                 'tipo' => config('enum.tipo.ADMIN'),
                 'ore_privilegi' => 7,
                 'credito' => 100,
+                'scadenzaCertificato' => '2021-04-20',
                 'email_verified_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
                 'password' => Hash::make('123456'),
-            ]);
+            ],
+        [
+            'name' => 'Marco Catania',
+            'username' => 'guga',
+            'email' => 'guga@gmail.com',
+            'anno' => 1975,
+            'tipo' => config('enum.tipo.STANDARD'),
+            'ore_privilegi' => 0,
+            'credito' => 100,
+            'scadenzaCertificato' => '2021-04-20',
+            'email_verified_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'password' => Hash::make('123456'),
+        ]]
+        );
 
         Field::insert([
             [

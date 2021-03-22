@@ -247,9 +247,10 @@ class BookingService
         $booking = Booking::with('users')->find($id);
         $this->ridareCredito($booking->tipo);
         $res = BookingUser::where('booking_id', $id)->where('user_id', Auth::id());
+        $prenotazioneDaCancellare = BookingUser::where('booking_id', $id);
         $res->first()->delete();
         activity()->log("L'utente " . Auth::user()->name . " ha cancellato la prenotazione con id: " . $booking->id . " per il giorno " . $booking->giorno . " alle ore " . $booking->orainizio . " (" . $booking->tipo . ")");
-        if ($res->count() == 0) {
+        if ($prenotazioneDaCancellare->count() == 0) {
             $booking->delete();
         }
         return $res;

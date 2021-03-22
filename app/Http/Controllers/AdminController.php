@@ -135,36 +135,29 @@ class AdminController extends Controller
 
     public function upload()
     {
-            /*$sql = "select * from utentiold where ob_indirizzo_email = '$user->email'";
-            $trovato = DB::select($sql);
-            if ($trovato){
-                $sql2 = "select * from soci where user = '$trovato[0]->ob_username'";
-                $trovato2 = DB::select($sql2);
-                $user->credito = $trovato[0]->credito;
-                $user->username = $trovato[0]->ob_username;
-                $user->password = Hash::make($trovato[0]->ob_password);
-                if($trovato2[0]->gratis == 1){
-                    $user->tipo = config('enum.tipo.PRIVILEGI');
-                } else if ($trovato2[0]->illimitati == 1) {
-                    $user->tipo = config('enum.tipo.ILLIMITATI');
-                }
-                $user->save();
-            }*/
             $sql = "select * from utentiold";
             $utentiold = DB::select($sql);
-            //dd($utentiold);
+
             foreach ($utentiold as $utenteold)
             {
                 $nomelow = Str::lower($utenteold->ob_nome);
                 $cognomelow = Str::lower($utenteold->ob_cognome);
                 $nominativo = trim(Str::ucfirst($nomelow).' '.ucfirst(Str::ucfirst($cognomelow)));
+                $sociosql = "select * FROM soci WHERE user = '$utenteold->ob_username'";
+                $socio = DB::select($sociosql);
+                $tipo = config('enum.tipo.STANDARD');
+                if($socio[0]->gratis == 1){
+                    $tipo = config('enum.tipo.PRIVILEGI');
+                } else if ($socio[0]->illimitati == 1) {
+                    $tipo = config('enum.tipo.ILLIMITATI');
+                }
                 User::insert(
                     [
                         'name' => $nominativo,
                         'username' => $utenteold->ob_username,
                         'email' => $utenteold->ob_indirizzo_email,
                         'anno' => $utenteold->ob_anno_nascita,
-                        'tipo' => config('enum.tipo.STANDARD'),
+                        'tipo' => $tipo,
                         'ore_privilegi' => $utenteold->privilegi,
                         'credito' => $utenteold->credito,
                         'email_verified_at' => now(),
@@ -178,12 +171,6 @@ class AdminController extends Controller
 
     public function duplicates()
     {
-
-        /*$sql = "SELECT ob_indirizzo_email, COUNT(ob_indirizzo_email) FROM utentiold GROUP BY ob_indirizzo_email HAVING COUNT(ob_indirizzo_email) > 1";
-        $utentiold = DB::select($sql);
-
-        dd($utentiold);*/
-
         $sql = "SELECT ob_nome, ob_cognome, credito, privilegi, utentiold.ob_indirizzo_email FROM utentiold INNER JOIN (SELECT ob_indirizzo_email FROM utentiold GROUP BY ob_indirizzo_email HAVING COUNT(ob_indirizzo_email) > 1) dup ON utentiold.ob_indirizzo_email = dup.ob_indirizzo_email ORDER BY utentiold.ob_indirizzo_email";
         $utentiold = DB::select($sql);
 
