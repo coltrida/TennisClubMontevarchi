@@ -60,6 +60,7 @@
 </head>
 
 <body class="">
+    @include('cookieConsent::index')
 
 <!-- Start Full Screen Overlay -->
 <div class="canvas-overlay">

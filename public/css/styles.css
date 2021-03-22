@@ -2226,6 +2226,20 @@ blockquote small::before {
     opacity: .5;
 }
 
+.info {
+    height: 90px;
+    position: fixed!important;
+    bottom:0%!important;
+    width:100%!important;
+    background-color: #bbb9b9 !important;
+    opacity: 0.8!important;
+    z-index: 999999;
+    padding: 20px 10px 0 15px;
+    vertical-align: middle!important;
+    color: black;
+    text-align: center;
+}
+
 /* --------------------------------------------------
  Custom Author Styles
 -------------------------------------------------- */
