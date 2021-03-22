@@ -179,7 +179,12 @@ class AdminController extends Controller
     public function duplicates()
     {
 
-        $sql = "SELECT ob_indirizzo_email, COUNT(ob_indirizzo_email) FROM utentiold GROUP BY ob_indirizzo_email HAVING COUNT(ob_indirizzo_email) > 1";
+        /*$sql = "SELECT ob_indirizzo_email, COUNT(ob_indirizzo_email) FROM utentiold GROUP BY ob_indirizzo_email HAVING COUNT(ob_indirizzo_email) > 1";
+        $utentiold = DB::select($sql);
+
+        dd($utentiold);*/
+
+        $sql = "SELECT ob_nome, ob_cognome, credito, privilegi, utentiold.ob_indirizzo_email FROM utentiold INNER JOIN (SELECT ob_indirizzo_email FROM utentiold GROUP BY ob_indirizzo_email HAVING COUNT(ob_indirizzo_email) > 1) dup ON utentiold.ob_indirizzo_email = dup.ob_indirizzo_email ORDER BY utentiold.ob_indirizzo_email";
         $utentiold = DB::select($sql);
 
         dd($utentiold);

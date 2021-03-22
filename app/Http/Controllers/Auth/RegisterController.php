@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use function dd;
+use function redirect;
 use function trim;
 use function ucfirst;
 
@@ -75,6 +76,10 @@ class RegisterController extends Controller
                 ['name', $nominativo],
                 ['anno', $data['anno']]
             ])->first();
+        if (!$user)
+        {
+            return $user;
+        }
         $user->username = trim($data['username']);
         $user->email = trim($data['email']);
         $user->password = Hash::make($data['password']);

@@ -73,19 +73,19 @@
         <form class="search-hero" action="{{ route('register') }}" method="post">
             @csrf
             <label class="input">
-                <input type="text" name="nome" required class="form-control" placeholder="Nome">
+                <input type="text" name="nome" required class="form-control" placeholder="Nome" value="{{ old('nome') }}">
             </label>
             <label class="input">
-                <input type="text" name="cognome" required class="form-control" placeholder="Cognome">
+                <input type="text" name="cognome" required class="form-control" placeholder="Cognome" value="{{ old('cognome') }}">
             </label>
             <label class="input">
-                <input type="text" name="username" required class="form-control" placeholder="username">
+                <input type="text" name="username" required class="form-control" placeholder="username" value="{{ old('username') }}">
             </label>
             <label class="input">
-                <input type="text" name="anno" required class="form-control" placeholder="Anno di nascita - yyyy">
+                <input type="text" name="anno" required class="form-control" placeholder="Anno di nascita - yyyy" value="{{ old('anno') }}">
             </label>
             <label class="input">
-                <input type="email" name="email" required class="form-control" placeholder="e-mail">
+                <input type="email" name="email" required class="form-control" placeholder="e-mail" value="{{ old('email') }}">
             </label>
             <label class="input">
                 <input type="password" name="password" required class="form-control" placeholder="password">
@@ -118,16 +118,16 @@
         <div class="container">
             <div class="head-left">
                 <ul class="social-links sl-circle">
-                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a target="_blank" href="https://www.facebook.com/Tennis-Club-Montevarchi-204172296285414/"><i class="fab fa-facebook-f"></i></a></li>
                     <li><a href="#"><i class="fab fa-instagram-square"></i></a></li>
-                    <li><a href="#"><i class="fa fa-globe"></i></a></li>
+                    {{--<li><a href="#"><i class="fa fa-globe"></i></a></li>--}}
                 </ul>
             </div>
 
             <div class="head-right">
                 @guest
-                    <strong>Next Game:</strong>
-                    <div id="clock"></div>
+                    <strong>La tua prossima partita: ....oggi!</strong>
+                    {{--<div>...oggi!</div>--}}
                 @else
                     <span class="badge" style="background-color: {{Auth::user()->isCertificatoScaduto ? 'red' : 'blue'}}; font-size: 17px">
                         <strong>{{Auth::user()->isCertificatoScaduto ? 'Certificato Scaduto' : 'Scad. Cert.:'}} {{Auth::user()->certificato}}</strong>
@@ -306,7 +306,7 @@
                     <div class="widget widget-paired-list">
                         <h3>&nbsp;</h3>
                         <ul class="list-paired">
-                            <li><em class="fa fa-clock-o scale-80 feat-color"></em> Vernerdì <span>9am - 10pm</span>
+                            <li><em class="fa fa-clock-o scale-80 feat-color"></em> Venerdì <span>9am - 10pm</span>
                             </li>
                             <li><em class="fa fa-clock-o scale-80 feat-color"></em> Sabato <span>9am - 9pm</span></li>
                             <li><em class="fa fa-clock-o scale-80 feat-color"></em> Domenica <span>7am - 9pm</span></li>

@@ -54,6 +54,21 @@
             </div>
         </div>
         @enderror
+        @if(session()->has('message'))
+            <div class="messaggio" id="messaggioErroreUsername" style="
+                  position: fixed;
+                  z-index: 1;
+                  top: 5vw;
+                  color: white;
+                  left: 20vw;
+                  text-align: center;
+                  background-color: black;
+                  width: 50%;
+                  border: 3px solid green;
+                  padding: 10px;">
+                    {{session()->get('message')}}
+            </div>
+        @endif
     <!-- Start Feature Slider -->
     <div class="rev_slider_wrapper">
         <div id="slider1" class="rev_slider rev-slider-standard"  data-version="5.0">
@@ -75,7 +90,8 @@
                         data-width="auto"
                         data-height="auto"
                         data-start="300">
-                        Our Blood, Our Sweat,<br/>Your Tears <small class="feat-color">- CLUB MOTTO</small>
+                        {{--Our Blood, Our Sweat,--}}<br/>Rafael Nadal {{--<small class="feat-color">- CLUB MOTTO</small>--}}
+                        {{--RAFAEL NADAL--}} {{--<small class="feat-color">- RAFAEL NADAL</small>--}}
                     </h1>
 
                     <!-- LAYER NR. 1 -->
@@ -92,13 +108,12 @@
                        data-width="auto"
                        data-height="auto"
                        data-start="500">
-                        Cum sociis natoque penatibus et magnis dis parturient montes,<br/>
-                        nascetur ridiculus mus. Maecenas sed diam eget risus varius<br/>
-                        blandit sit amet non magna…
+                        Nel tennis ti trovi mille volte indietro, 5-4, 6-5, <br>
+                        ma devi lottare, diventare ancor più aggressivo, non avere paura…
                     </p>
 
                     <!-- LAYER NR. 1 -->
-                    <div class="tp-caption"
+                    {{--<div class="tp-caption"
                          data-x="left" data-hoffset="0"
                          data-y="top" data-voffset="335"
                          data-whitespace="normal"
@@ -107,10 +122,10 @@
                          data-transform_out="x:-250px;y:0px;rX:{0,0};rY:{0,0};sX:1;sY:1;opacity:0;s:300;e:Power3.easeInOut"
                          data-start="700">
                         <a href="#" class="btn btn-success">Join Our Club</a>
-                    </div>
+                    </div>--}}
 
                     <!-- LAYER NR. 1 -->
-                    <div class="tp-caption"
+                    {{--<div class="tp-caption"
                          data-x="left" data-hoffset="150"
                          data-y="top" data-voffset="335"
                          data-whitespace="normal"
@@ -119,7 +134,7 @@
                          data-transform_out="x:-250px;y:0px;rX:{0,0};rY:{0,0};sX:1;sY:1;opacity:0;s:300;e:Power3.easeInOut"
                          data-start="700">
                         <a href="#" class="btn btn-warning">Read More</a>
-                    </div>
+                    </div>--}}
                 </li><!--/. END SLIDE -->
 
 
@@ -141,7 +156,7 @@
                         data-width="auto"
                         data-height="auto"
                         data-start="300">
-                        Our Blood, Our Sweat,<br/>Your Tears <small class="feat-color">- CLUB MOTTO</small>
+                        {{--Our Blood, Our Sweat,--}}<br/>Bjorn Borg {{--<small class="feat-color">- CLUB MOTTO</small>--}}
                     </h1>
 
                     <!-- LAYER NR. 1 -->
@@ -158,13 +173,11 @@
                        data-width="auto"
                        data-height="auto"
                        data-start="500">
-                        Cum sociis natoque penatibus et magnis dis parturient montes,<br/>
-                        nascetur ridiculus mus. Maecenas sed diam eget risus varius<br/>
-                        blandit sit amet non magna…
+                        Se non hai paura di perdere, non meriti di vincere
                     </p>
 
                     <!-- LAYER NR. 1 -->
-                    <div class="tp-caption"
+                    {{--<div class="tp-caption"
                          data-x="left" data-hoffset="0"
                          data-y="top" data-voffset="335"
                          data-whitespace="normal"
@@ -173,10 +186,10 @@
                          data-transform_out="x:-250px;y:0px;rX:{0,0};rY:{0,0};sX:1;sY:1;opacity:0;s:300;e:Power3.easeInOut"
                          data-start="700">
                         <a href="#" class="btn btn-success">Join Our Club</a>
-                    </div>
+                    </div>--}}
 
                     <!-- LAYER NR. 1 -->
-                    <div class="tp-caption"
+                    {{--<div class="tp-caption"
                          data-x="left" data-hoffset="150"
                          data-y="top" data-voffset="335"
                          data-whitespace="normal"
@@ -185,7 +198,7 @@
                          data-transform_out="x:-250px;y:0px;rX:{0,0};rY:{0,0};sX:1;sY:1;opacity:0;s:300;e:Power3.easeInOut"
                          data-start="700">
                         <a href="#" class="btn btn-warning">Read More</a>
-                    </div>
+                    </div>--}}
                 </li><!--/. END SLIDE -->
 
             </ul>
@@ -361,7 +374,7 @@
                                     <em class="fa fa-search"></em>
                                 </div>
                             </div>
-                            <div class="caption-text">Insert your caption</div>
+                            {{--<div class="caption-text">Insert your caption</div>--}}
                         </a>
                     </div>
 
@@ -374,7 +387,7 @@
                                     <em class="fa fa-search"></em>
                                 </div>
                             </div>
-                            <div class="caption-text">Insert your caption</div>
+                            {{--<div class="caption-text">Insert your caption</div>--}}
                         </a>
                     </div>
 
@@ -387,7 +400,7 @@
                                     <em class="fa fa-search"></em>
                                 </div>
                             </div>
-                            <div class="caption-text">Insert your caption</div>
+                            {{--<div class="caption-text">Insert your caption</div>--}}
                         </a>
                     </div>
 
@@ -400,7 +413,7 @@
                                     <em class="fa fa-search"></em>
                                 </div>
                             </div>
-                            <div class="caption-text">Insert your caption</div>
+                            {{--<div class="caption-text">Insert your caption</div>--}}
                         </a>
                     </div>
 
@@ -413,7 +426,7 @@
                                     <em class="fa fa-search"></em>
                                 </div>
                             </div>
-                            <div class="caption-text">Insert your caption</div>
+                            {{--<div class="caption-text">Insert your caption</div>--}}
                         </a>
                     </div>
 
@@ -426,7 +439,7 @@
                                     <em class="fa fa-search"></em>
                                 </div>
                             </div>
-                            <div class="caption-text">Insert your caption</div>
+                            {{--<div class="caption-text">Insert your caption</div>--}}
                         </a>
                     </div>
 
@@ -439,7 +452,7 @@
                                     <em class="fa fa-search"></em>
                                 </div>
                             </div>
-                            <div class="caption-text">Insert your caption</div>
+                            {{--<div class="caption-text">Insert your caption</div>--}}
                         </a>
                     </div>
 
@@ -452,7 +465,7 @@
                                     <em class="fa fa-search"></em>
                                 </div>
                             </div>
-                            <div class="caption-text">Insert your caption</div>
+                            {{--<div class="caption-text">Insert your caption</div>--}}
                         </a>
                     </div>
 
@@ -465,7 +478,7 @@
                                     <em class="fa fa-search"></em>
                                 </div>
                             </div>
-                            <div class="caption-text">Insert your caption</div>
+                            {{--<div class="caption-text">Insert your caption</div>--}}
                         </a>
                     </div>
 
@@ -478,7 +491,7 @@
                                     <em class="fa fa-search"></em>
                                 </div>
                             </div>
-                            <div class="caption-text">Insert your caption</div>
+                            {{--<div class="caption-text">Insert your caption</div>--}}
                         </a>
                     </div>
 
