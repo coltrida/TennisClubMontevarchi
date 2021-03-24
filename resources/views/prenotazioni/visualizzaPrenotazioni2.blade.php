@@ -44,11 +44,11 @@
                     </div>
                     <div class="row row-cols-2 row-cols-md-6 gx-1" style="display: flex; justify-content: space-around; margin: 5px 0; align-items: center" >
                         @include('partials.infoCreditoPrivilegi')
-                        @if(Auth::user()->isAdmin)
+                       {{-- @if(Auth::user()->isAdmin)
                             <a href="{{route('stampa')}}"
                                class="btn shadow btn-success">stampa
                             </a>
-                        @endif
+                        @endif--}}
                     </div>
                 </div>
             </div>

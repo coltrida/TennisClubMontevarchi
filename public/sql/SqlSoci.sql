@@ -1,3 +1,31 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.8.2
+-- http://www.phpmyadmin.net
+--
+-- Host: 62.149.150.142
+-- Generato il: Mar 23, 2021 alle 15:51
+-- Versione del server: 5.5.62-38.14-log
+-- Versione PHP: 5.3.8
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `Sql507088_1`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `soci`
+--
+
 CREATE TABLE IF NOT EXISTS `soci` (
   `user` varchar(12) NOT NULL,
   `nome` varchar(20) NOT NULL,
@@ -30,6 +58,7 @@ INSERT INTO `soci` (`user`, `nome`, `cognome`, `anno`, `soprannome`, `classifica
 ('emanuele', 'Emanuele', 'Cresti', 1966, '', '', '', '', 0, 0, 0),
 ('ezio00', 'Matteo', 'Cavoto', 2000, '', '', '', '', 0, 0, 0),
 ('lucio69', 'Luciano', 'Cavoto', 1969, '', '', '', '', 0, 0, 0),
+('sabri', 'Sabrina', 'Armi', 1962, '', '', '', '', 0, 0, 0),
 ('samuele66', 'Samuele', 'Baldini', 1966, '', '', '', '', 0, 0, 0),
 ('tommy76', 'Tommaso', 'Bargellini', 1976, '', '', ' ', 'Vincitore Torneo Sociale Cat.NC 2010', 0, 0, 0),
 ('daniele', 'Daniele', 'Boni', 1978, '', '', '', '', 0, 0, 0),
@@ -40,6 +69,7 @@ INSERT INTO `soci` (`user`, `nome`, `cognome`, `anno`, `soprannome`, `classifica
 ('renzim', 'Massimiliano', 'Renzi', 1970, '', '4/6', 'Completo', '', 0, 0, 0),
 ('ale', 'Alessandro', 'Righi', 1975, 'manodepetra', '4.5', 'Completo', 'righi b. jois 6/4 5-0\r\nrighi/rossi b. jois fabbrini 6/3 5/7 6/3 6/4\r\nrighi ribatte jois 6/3 3/2\r\nrighi batte antinori 6/1 2/1 in 45 minuti', 0, 0, 0),
 ('lucio', 'Luciano', 'Rossetti', 1951, '', '', '', '', 0, 0, 0),
+('pitena', 'Romano', 'Scala', 1954, '', '', '', '', 0, 0, 0),
 ('bigamore', 'Moreno', 'Bigazzi', 1954, '', '', '', '', 0, 0, 0),
 ('baco 54', 'Stefano', 'Casini', 1954, '', 'NC.', 'Pallettaro', '', 1, 0, 0),
 ('c83.stella', 'Chiara', 'Gonnelli', 1983, '', '', '', '', 1, 0, 0),
@@ -169,6 +199,7 @@ INSERT INTO `soci` (`user`, `nome`, `cognome`, `anno`, `soprannome`, `classifica
 ('andjelic', 'Mia', 'Andjelic', 1999, '', '', '', '', 0, 0, 0),
 ('france', 'Francesco', 'Barone', 1997, '', '', '', '', 1, 0, 0),
 ('andrea1976', 'Andrea', 'Morbidelli', 1976, '', '', '', '', 0, 0, 0),
+('pier', 'Piergiovanni', 'Rossi', 2007, '', '', '', '', 1, 0, 0),
 ('fabrizio ', 'Fabrizio', 'Renzi', 1972, '', '', '', '', 0, 0, 0),
 ('niki', 'Niccolò', 'Rossi', 1998, '', '', '', '', 0, 0, 0),
 ('fiorentina', 'Paolo', 'Donzellini', 1950, '', '', '', '', 0, 1, 0),
@@ -196,6 +227,7 @@ INSERT INTO `soci` (`user`, `nome`, `cognome`, `anno`, `soprannome`, `classifica
 ('alberto74', 'Stefano', 'Calvo', 1974, '', '', '', '', 0, 0, 0),
 ('richelieu', 'Marco', 'Taccari', 1953, '', '', '', '', 0, 1, 0),
 ('losiflores', 'Lorenzo', 'Losi', 1991, '', '', '', '', 0, 0, 0),
+('lollo', 'Lorenzo', 'Dolfi', 1981, '', '', '', '', 0, 0, 0),
 ('logan86', 'Tiziano', 'Meoni', 1986, '', '', '', '', 0, 0, 0),
 ('ina', 'Valentina', 'Billi', 1984, '', '', '', '', 0, 0, 0),
 ('tlin', 'Andrea', 'Otelli', 1981, '', '', '', '', 0, 0, 0),
@@ -252,6 +284,7 @@ INSERT INTO `soci` (`user`, `nome`, `cognome`, `anno`, `soprannome`, `classifica
 ('fil.tan', 'Filippo', 'Tanzi', 1979, '', '', '', '', 0, 0, 0),
 ('badii', 'Francesco', 'Badii', 1970, '', '', '', '', 0, 0, 0),
 ('deasystem', 'Andrea', 'Fratini', 1979, '', '', '', '', 0, 0, 0),
+('robertoboyer', 'Roberto', 'Boyer', 1947, '', '', '', '', 0, 1, 0),
 ('kandokan', 'Maurizio', 'Baldi', 1970, '', '', '', '', 0, 0, 0),
 ('', 'Fei', 'Annalisa', 1988, '', '', '', '', 0, 0, 0),
 ('annalisa', 'Annalisa', 'Fei', 1988, '', '', '', '', 0, 0, 0),
@@ -297,6 +330,7 @@ INSERT INTO `soci` (`user`, `nome`, `cognome`, `anno`, `soprannome`, `classifica
 ('rotesi', 'Elisabetta', 'Rotesi', 1963, '', '', '', '', 0, 0, 0),
 ('vannini', 'Alessio', 'Vannini', 1987, '', '', '', '', 0, 0, 0),
 ('bardelloni', 'Luca', 'bardelloni', 1972, '', '', '', '', 0, 0, 0),
+('rubrigi', 'Nilo', 'Rubrigi', 1947, '', '', '', '', 0, 0, 0),
 ('meucci', 'Leonardo', 'Meucci', 2002, '', '', '', '', 0, 0, 0),
 ('matteini', 'Francesco', 'Matteini', 1989, '', '', '', '', 0, 0, 0),
 ('', 'Simona', 'Agostini', 1930, '', '', '', '', 0, 0, 0),
@@ -328,3 +362,7 @@ INSERT INTO `soci` (`user`, `nome`, `cognome`, `anno`, `soprannome`, `classifica
 ('giovanni', 'Giovanni', 'Taccari', 1991, '', '', '', '', 0, 0, 0),
 ('riccardo', 'Riccardo', 'Orlandi', 1985, '', '', '', '', 0, 0, 0),
 ('righeschi', 'Mirko', 'Righeschi', 1973, '', '', '', '', 0, 0, 0);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

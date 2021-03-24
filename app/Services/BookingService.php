@@ -31,13 +31,23 @@ class BookingService
 
     public function createPrenotazione($giorno, $ora, $campo, $tipo)
     {
-        if (!$this->verficaCredito($tipo)) {
-            return false;
-        }
-        $prenotazioneEsistente = $this->prentazioneEsistente($giorno, $ora, $campo);
+        $prenotazioneEsistente = $this->prenotazioneEsistente($giorno, $ora, $campo);
         if (!$prenotazioneEsistente) {
+            if (!$this->verficaCredito($tipo)) {
+                return false;
+            }
             $res = $this->creaNuovaPrenotazione($giorno, $ora, $campo, $tipo);
         } else {
+            if ($prenotazioneEsistente->tipo == 'Singolare' && $prenotazioneEsistente->users->count() == 2)
+            {
+                return 'full';
+            } else if($prenotazioneEsistente->tipo == 'Doppio' && $prenotazioneEsistente->users->count() == 4)
+                {
+                    return 'full';
+                }
+            if (!$this->verficaCredito($tipo)) {
+                return false;
+            }
             $res = $this->aggiornaPrenotazioneEsistente($prenotazioneEsistente);
         }
         Mail::to(Auth::user()->email)->queue(new PrenotazioneOra($giorno, $ora, $campo, $tipo, Auth::user()->credito));
@@ -194,9 +204,9 @@ class BookingService
         return true;
     }
 
-    private function prentazioneEsistente($giorno, $ora, $campo)
+    private function prenotazioneEsistente($giorno, $ora, $campo)
     {
-        return Booking::where([
+        return Booking::with('users')->where([
             ['giorno', $giorno],
             ['orainizio', $ora],
             ['campo', $campo]

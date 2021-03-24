@@ -249,25 +249,24 @@
 
                 <div class="col-sm-3">
                     <div class="widget widget-single-post">
-                        <h3>Featured News</h3>
-                        <a href="post-standard.html">
-                            <div class="hover-box-container">
-                                <div class="hover-box">
-                                    <em class="date">17 March</em>
-                                    <img src="{{asset('img/fill-3.jpg')}}"  alt="Fill" />
-                                </div>
-                            </div>
-                            <h4>Nominated club of the year</h4>
-                            <p>Nullam id dolor id nibh ultr cies vehicula ut id elit natoque putid…</p>
+                        <h3>La Struttura</h3>
+                        <div class="hover-box-container">
+                            <a href="{{asset('img/fill-10.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="La Struttura">
+                                <img src="{{asset('img/fill-10.jpg')}}" alt="alt" />
+                                <div class="hover-box-content-container">
+                                    <div class="hover-box-content">
 
-                        </a>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="col-sm-3">
                     <!-- Start Widget -->
                     <div class="widget widget-post-thumbs">
-                        <h3>Coming Events</h3>
+                        <h3>Eventi</h3>
                         <ul class="list-post-thumbs">
                             <li>
                                 <a href="event.html">
@@ -275,7 +274,7 @@
                                     <div>
                                         <p><strong>Sydney VS Our Team</strong></p>
                                         <p>Nullam id dolor id niutid elit…<br/>
-                                            <small class="meta-text">17 March</small></p>
+                                            {{--<small class="meta-text">17 March</small></p>--}}
                                     </div>
                                 </a>
                             </li>
@@ -285,7 +284,7 @@
                                     <div>
                                         <p><strong>Semi Finals - Us Vs Tigers</strong></p>
                                         <p>Nullam id dolor id niutid elit…<br/>
-                                            <small class="meta-text">17 March</small></p>
+                                            {{--<small class="meta-text">17 March</small></p>--}}
                                     </div>
                                 </a>
                             </li>
@@ -295,7 +294,7 @@
                                     <div>
                                         <p><strong>Club Presentations</strong></p>
                                         <p>Nullam id dolor id niutid elit…<br/>
-                                            <small class="meta-text">17 March</small></p>
+                                            {{--<small class="meta-text">17 March</small></p>--}}
                                     </div>
                                 </a>
                             </li>
@@ -367,7 +366,7 @@
 
                     <!-- Gallery Item -->
                     <div class="grid-item ftr-1 hover-box-container hb-effect-fade">
-                        <a href="{{asset('img/fill-4.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="Insert Your Titles">
+                        <a href="{{asset('img/fill-4.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="La Struttura">
                             <img src="{{asset('img/fill-4.jpg')}}" alt="alt" />
                             <div class="hover-box-content-container">
                                 <div class="hover-box-content">
@@ -380,7 +379,7 @@
 
                     <!-- Gallery Item -->
                     <div class="grid-item ftr-2 hover-box-container hb-effect-fade">
-                        <a href="{{asset('img/fill-2.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="Insert Your Titles">
+                        <a href="{{asset('img/fill-2.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="La Struttura">
                             <img src="{{asset('img/fill-2.jpg')}}" alt="alt" />
                             <div class="hover-box-content-container">
                                 <div class="hover-box-content">
@@ -393,7 +392,7 @@
 
                     <!-- Gallery Item -->
                     <div class="grid-item ftr-1 hover-box-container hb-effect-fade">
-                        <a href="{{asset('img/fill-1.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="Insert Your Titles">
+                        <a href="{{asset('img/fill-1.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="La Struttura">
                             <img src="{{asset('img/fill-1.jpg')}}" alt="alt" />
                             <div class="hover-box-content-container">
                                 <div class="hover-box-content">
@@ -406,7 +405,7 @@
 
                     <!-- Gallery Item -->
                     <div class="grid-item ftr-1 hover-box-container hb-effect-fade">
-                        <a href="{{asset('img/fill-3.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="Insert Your Titles">
+                        <a href="{{asset('img/fill-3.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="La Struttura">
                             <img src="{{asset('img/fill-3.jpg')}}" alt="alt" />
                             <div class="hover-box-content-container">
                                 <div class="hover-box-content">
@@ -419,7 +418,7 @@
 
                     <!-- Gallery Item -->
                     <div class="grid-item ftr-1 hover-box-container hb-effect-fade">
-                        <a href="{{asset('img/fill-5.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="Insert Your Titles">
+                        <a href="{{asset('img/fill-5.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="La Struttura">
                             <img src="{{asset('img/fill-5.jpg')}}" alt="alt" />
                             <div class="hover-box-content-container">
                                 <div class="hover-box-content">
@@ -432,7 +431,7 @@
 
                     <!-- Gallery Item -->
                     <div class="grid-item ftr-2 hover-box-container hb-effect-fade">
-                        <a href="{{asset('img/fill-6.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="Insert Your Titles">
+                        <a href="{{asset('img/fill-6.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="La Struttura">
                             <img src="{{asset('img/fill-6.jpg')}}" alt="alt" />
                             <div class="hover-box-content-container">
                                 <div class="hover-box-content">
@@ -445,7 +444,7 @@
 
                     <!-- Gallery Item -->
                     <div class="grid-item hover-box-container hb-effect-fade">
-                        <a href="{{asset('img/fill-7.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="Insert Your Titles">
+                        <a href="{{asset('img/fill-7.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="La Struttura">
                             <img src="{{asset('img/fill-7.jpg')}}" alt="alt" />
                             <div class="hover-box-content-container">
                                 <div class="hover-box-content">
@@ -458,7 +457,7 @@
 
                     <!-- Gallery Item -->
                     <div class="grid-item ftr-2 hover-box-container hb-effect-fade">
-                        <a href="{{asset('img/fill-8.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="Insert Your Titles">
+                        <a href="{{asset('img/fill-8.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="La Struttura">
                             <img src="{{asset('img/fill-8.jpg')}}" alt="alt" />
                             <div class="hover-box-content-container">
                                 <div class="hover-box-content">
@@ -471,7 +470,7 @@
 
                     <!-- Gallery Item -->
                     <div class="grid-item ftr-1 hover-box-container hb-effect-fade">
-                        <a href="{{asset('img/fill-9.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="Insert Your Titles">
+                        <a href="{{asset('img/fill-9.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="La Struttura">
                             <img src="{{asset('img/fill-9.jpg')}}" alt="alt" />
                             <div class="hover-box-content-container">
                                 <div class="hover-box-content">
@@ -484,7 +483,7 @@
 
                     <!-- Gallery Item -->
                     <div class="grid-item ftr-2 hover-box-container hb-effect-fade">
-                        <a href="{{asset('img/fill-10.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="Insert Your Titles">
+                        <a href="{{asset('img/fill-10.jpg')}}" class="fancybox hover-box" data-fancybox-group="gallery1" title="La Struttura">
                             <img src="{{asset('img/fill-10.jpg')}}" alt="alt" />
                             <div class="hover-box-content-container">
                                 <div class="hover-box-content">

@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::insert(
-            [[
+        User::insert([
+            [
                 'name' => 'Tc Montevarchi',
                 'username' => 'cacao',
                 'email' => 'coltrida@gmail.com',
@@ -30,27 +30,41 @@ class DatabaseSeeder extends Seeder
                 'tipo' => config('enum.tipo.ADMIN'),
                 'ore_privilegi' => 7,
                 'credito' => 100,
-                'scadenzaCertificato' => '2021-04-20',
+                'scadenzaCertificato' => '2021-08-20',
                 'email_verified_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
                 'password' => Hash::make('123456'),
             ],
-        [
-            'name' => 'Marco Catania',
-            'username' => 'guga',
-            'email' => 'guga@gmail.com',
-            'anno' => 1975,
-            'tipo' => config('enum.tipo.STANDARD'),
-            'ore_privilegi' => 0,
-            'credito' => 100,
-            'scadenzaCertificato' => '2021-04-20',
-            'email_verified_at' => now(),
-            'created_at' => now(),
-            'updated_at' => now(),
-            'password' => Hash::make('123456'),
-        ]]
-        );
+            [
+                'name' => 'Marco Cat',
+                'username' => 'guga',
+                'email' => 'guga@gmail.com',
+                'anno' => 1975,
+                'tipo' => config('enum.tipo.STANDARD'),
+                'ore_privilegi' => 7,
+                'credito' => 100,
+                'scadenzaCertificato' => '2021-08-20',
+                'email_verified_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+                'password' => Hash::make('123456'),
+            ],
+            [
+                'name' => 'Davide colt',
+                'username' => 'colt',
+                'email' => 'colt@gmail.com',
+                'anno' => 1975,
+                'tipo' => config('enum.tipo.STANDARD'),
+                'ore_privilegi' => 7,
+                'credito' => 100,
+                'scadenzaCertificato' => '2021-08-20',
+                'email_verified_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+                'password' => Hash::make('123456'),
+            ],
+            ]);
 
         Field::insert([
             [
